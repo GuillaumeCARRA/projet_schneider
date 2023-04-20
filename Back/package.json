@@ -5,8 +5,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1", 
-    "start": "node C:/Users/SESA681854/Documents/Projet/code/projet_schneider/Back/app/app.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node C:/Users/SESA681854/Documents/Projet/code/projet_schneider/Back/app/app.js",
+    "dev": "nodemon C:/Users/SESA681854/Documents/Projet/code/projet_schneider/Back/app/app.js"
   },
   "keywords": [],
   "author": "Guillaume CARRA",
@@ -18,5 +19,8 @@
     "passport-ldapauth": "^3.0.1",
     "pg": "^8.10.0",
     "sequelize": "^6.31.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   }
 }
