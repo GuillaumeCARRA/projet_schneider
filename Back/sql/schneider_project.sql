@@ -85,4 +85,28 @@ CREATE TABLE "order_history" (
     "product_order_id" INT REFERENCES "product_order"("id")
 );
 
+
+/*START INTERMEDIATE TABLE*/
+
+CREATE TABLE "documentation_file_category" (
+    "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
+    "documentation_file_id" INT REFERENCES "documentation_file"("id"), 
+    "documentation_category_id" INT REFERENCES "documentation_category"("id")
+);
+
+CREATE TABLE "download_file_category" (
+    "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
+    "download_file_id" INT REFERENCES "download_file"("id"), 
+    "download_category_id" INT REFERENCES "download_category"("id")
+);
+
+
+CREATE TABLE "faq_ask_category" (
+    "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
+    "faq_ask_id" INT REFERENCES "faq_ask"("id"), 
+    "faq_category_id" INT REFERENCES "faq_category"("id")
+);
+
+/*END INTERMEDIATE TABLE*/
+
 COMMIT; 
