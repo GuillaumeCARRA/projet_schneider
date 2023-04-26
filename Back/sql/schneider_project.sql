@@ -10,7 +10,8 @@ DROP TABLE IF EXISTS "documentation_category",
                      "role",
                      "product",
                      "product_order",
-                     "order_history";
+                     "order_history",
+                     "faq_ask_category";
                      
 
 CREATE TABLE "documentation_category" (
