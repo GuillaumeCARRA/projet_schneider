@@ -1,0 +1,16 @@
+documentation_category(id, documentation_category_name);
+documentation_file(id, documentation_file_name, documentation_file_format, documentation_file_img, documentation_file_size, #documentation_category(id))
+download_category(id, download_category_name)
+download_file(id, download_file_name, download_file_format, download_file_img, downdload_file_size, #download_category(id))
+faq_answer(id, answer)
+faq_category(id, faq_category_name)
+faq_ask(id, ask, #faq_answer(id), #faq_category(id))
+role(id, label)
+product(id, product_name, product_img, product_description, product_price)
+product_order(id,product_order_quantity, product_oder_total_amount, product_order_date_purchase, #product(id))
+order_history(id, #product_order(id)) 
+documentation_file_category(id,#documentation_file(id), #documentation_category(id))
+download_file_category(id, #download_file(id), #download_category(id))
+faq_ask_category(id, #faq_ask(id), #faq_category(id))
+
+# = foreign key
