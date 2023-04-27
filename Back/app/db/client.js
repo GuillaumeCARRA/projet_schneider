@@ -1,15 +1,17 @@
 import { Sequelize } from "sequelize";
 import {} from 'dotenv/config';
 
-// we create an instance of the class by configuring it with our DATABASE_URL variable
+// Création d'une nouvelle instance Sequelize 
+// Avec l'URL de la base de données provenant des variables d'environnement
 const sequelize = new Sequelize(
     process.env.DATABASE_URL, {
         define: {
             
-            // allow field names in snake_case
+            // Permet d'utiliser les noms de champs en snake_case dans les modèles
             underscored: true,
 
-            // we add a config property to activate the automatic addition of 2 fields to our models:
+            // Par défaut, Sequelize ajoute automatiquement ces champs à chaque modèle créé 
+            // pour enregistrer la date et l'heure de création et de mise à jour de chaque enregistrement dans la base de données
             // - createdAt
             // - updatedAt
             timestamps: false
