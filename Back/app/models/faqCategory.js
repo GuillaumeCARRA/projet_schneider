@@ -12,7 +12,7 @@ FaqCategory.init(
     {
         sequelize, 
 
-        tableName:"faq_answer"
+        tableName:"faq_category"
     }
 );
 
