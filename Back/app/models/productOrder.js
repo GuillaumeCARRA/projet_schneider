@@ -8,7 +8,7 @@ ProductOrder.init(
     {
         product_order_quantity: DataTypes.INTEGER,
         product_oder_total_amount: DataTypes.INTEGER, 
-        product_order_date_purchase: DataTypes.DATE,
+        product_order_date_purchase: DataTypes.DATEONLY,
         product_id: DataTypes.INTEGER
     },
 
