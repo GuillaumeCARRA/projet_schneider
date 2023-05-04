@@ -1,0 +1,1 @@
+import DocumentationCategory from "../models/documentationCategory.js";

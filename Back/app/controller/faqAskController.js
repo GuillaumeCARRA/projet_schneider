@@ -1,0 +1,1 @@
+import FaqAsk from "../models/faqAsk.js"
