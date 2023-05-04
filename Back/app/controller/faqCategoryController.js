@@ -1,0 +1,1 @@
+import FaqCategory from "../models/faqCategory.js"; 
