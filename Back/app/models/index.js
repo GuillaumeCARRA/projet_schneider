@@ -53,5 +53,90 @@ OrderHistory.belongsTo(ProductOrder, {
 
     as: 'orders'
 }); 
-
 /** END RELATION 1N - 11 */
+
+
+/** START RELATION N - N */
+DocumentationFile.belongsToMany(DocumentationCategory, {
+    // le nom de la table de liaison
+    through: "documentation_file_category",
+
+    // le nom de la clef qui correspond à DocumentationFile
+    foreignKey: "documentation_file_id",
+
+    // le nom de la clef qui correspond à DocumentationCategory
+    otherKey: "documentation_category_id",
+
+    // l'alias de l'association
+    as: "categories"
+});
+
+DocumentationCategory.belongsToMany(DocumentationFile, {
+    // le nom de la table de liaison
+    through: "documentation_file_category",
+
+    // le nom de la clef qui correspond à DocumentationFile
+    foreignKey: "documentation_category_id",
+
+    // le nom de la clef qui correspond à DocumentationCategory
+    otherKey: "documentation_file_id",
+
+    // l'alias de l'association
+    as: "files"
+});
+
+DownloadFile.belongsToMany(DownloadCategory, {
+    through: "download_file_category",
+
+    foreignKey: "download_file_id",
+
+    otherKey: "download_category_id", 
+
+    as: "dlCategories"
+});
+
+DownloadCategory.belongsToMany(DownloadFile, {
+    through: "download_file_category",
+
+    foreignKey: "download_category_id",
+
+    otherKey: "download_file_id", 
+
+    as: "dlFiles"
+
+});
+
+FaqCategory.belongsToMany(FaqAsk, {
+    through: "faq_ask_category",
+
+    foreignKey: "faq_category_id",
+
+    otherKey: "faq_ask_id", 
+
+    as: "asks"
+});
+
+FaqAsk.belongsToMany(FaqCategory, {
+    through: "faq_ask_category",
+
+    foreignKey: "faq_ask_id",
+
+    otherKey: "faq_category_id", 
+
+    as: "faqCategories"
+});
+
+/** END RELATION N - N */
+
+export default {
+    FaqAsk, 
+    FaqAnswer, 
+    Product, 
+    ProductOrder, 
+    OrderHistory, 
+    DocumentationFile, 
+    DocumentationCategory, 
+    DownloadFile, 
+    DownloadCategory, 
+    FaqCategory
+};
