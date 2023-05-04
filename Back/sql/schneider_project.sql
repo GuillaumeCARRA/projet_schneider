@@ -1,18 +1,19 @@
 BEGIN; 
 
-DROP TABLE IF EXISTS "documentation_category",
-                     "documentation_file",
-                     "download_category",
-                     "download_file",
-                     "faq_answer",
-                     "faq_category",
-                     "faq_ask",
-                     "role",
-                     "product",
-                     "product_order",
-                     "order_history",
+DROP TABLE IF EXISTS "documentation_category", 
+                     "documentation_file", 
+                     "download_category", 
+                     "download_file", 
+                     "faq_answer", 
+                     "faq_category", 
+                     "faq_ask", 
+                     "role", 
+                     "product", 
+                     "product_order", 
+                     "order_history", 
+                     "documentation_file_category", 
+                     "download_file_category", 
                      "faq_ask_category";
-                     
 
 CREATE TABLE "documentation_category" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
@@ -44,7 +45,7 @@ CREATE TABLE "download_file" (
 
 CREATE TABLE "faq_answer" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
-    "answer" TEXT NOT NULL
+    "answer" TEXT NOT NULL,
 );
 
 CREATE TABLE "faq_category" (
@@ -107,6 +108,8 @@ CREATE TABLE "faq_ask_category" (
     "faq_ask_id" INT REFERENCES "faq_ask"("id"), 
     "faq_category_id" INT REFERENCES "faq_category"("id")
 );
+
+
 
 /*END INTERMEDIATE TABLE*/
 
