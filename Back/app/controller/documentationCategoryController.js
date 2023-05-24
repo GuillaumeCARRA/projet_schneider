@@ -2,7 +2,11 @@ import DocumentationCategory from "../models/documentationCategory.js";
 
 const getAllDocumentationCategories = async (req, res) => {
     try {
-        const documentationCategories = await DocumentationCategory.findAll();
+        const documentationCategories = await DocumentationCategory.findAll({
+            include: [
+                {association: "files"}
+            ]
+        });
 
         res.json({data: documentationCategories}); 
     } catch (error) {
@@ -16,8 +20,11 @@ const getOneDocumentationCategory = async (req, res) => {
         const documentationId = req.params.id; 
 
         const oneCategory = await DocumentationCategory.findOne({
-            where: ({id: documentationId})
-        })
+            where: ({id: documentationId}), 
+            include: [
+                {association: "files"}
+            ]
+        });
 
         res.json({data: oneCategory}); 
 
@@ -41,6 +48,65 @@ const createDocumentationCategory = async(req, res) => {
         
     } catch (error) {
         console.log(error);
-        res.status(500).json({error})
+        res.status(500).json({error});
     }
+}
+
+const updateCategory = async(req, res) => {
+    try {
+
+        const updatedCategory = await DocumentationCategory.findOne({
+            where: {id: req.params.id}
+        }); 
+
+        if(!updatedCategory) {
+            return res.status(404).json({error: "aucunes catégories"}); 
+        }
+
+        const {
+            documentation_category_name
+        } = req.body
+
+        if(documentation_category_name) {
+            updatedCategory.documentation_category_name = documentation_category_name; 
+        }
+
+        await updatedCategory.save();
+
+        res.json({data: updatedCategory});
+        
+    } catch (error) {
+        console.log(error);
+
+        res.status(500).json({error});
+    }
+}
+
+const deleteCategory = async (req, res) => {
+    try {
+        const deletedCategory = await DocumentationCategory.findOne({
+            where: {id: request.params.id}
+        }); 
+
+
+        if(!deletedCategory) {
+            return res.status(404).json({error: "Aucune catégorie"});
+        }
+
+        await deletedCategory.destroy();
+
+        res.json({data: deletedCategory});
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error });
+    }
+}
+
+export default {
+    getAllDocumentationCategories, 
+    getOneDocumentationCategory, 
+    createDocumentationCategory, 
+    updateCategory,
+    deleteCategory
 }
