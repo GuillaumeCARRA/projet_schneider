@@ -1,4 +1,5 @@
 import OrderHistory from "../models/orderHistory.js";
+import {} from "../models/index.js";
 
 const getAllOrderHistories = async (req, res) => {
     try {

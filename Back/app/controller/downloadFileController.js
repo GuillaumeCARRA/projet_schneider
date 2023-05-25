@@ -1,4 +1,5 @@
 import DownloadFile from "../models/downloadFile.js";
+import {} from "../models/index.js";
 
 const getAllDownloadFiles = async (req, res) => {
     try {

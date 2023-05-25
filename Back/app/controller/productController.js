@@ -1,4 +1,5 @@
 import Product from "../models/product.js";
+import {} from "../models/index.js";
 
 const getAllProducts = async (req, res) => {
     try {
@@ -47,7 +48,7 @@ const createProduct = async(req, res) => {
 
         const product = await Product.create(productData);
 
-        res.statut(201).json(product); 
+        res.status(201).json(product); 
         
     } catch (error) {
         console.log(error);

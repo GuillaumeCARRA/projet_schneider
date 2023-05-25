@@ -1,4 +1,5 @@
 import DownloadCategory from "../models/downloadCategory.js"; 
+import {} from "../models/index.js";
 
 const getAllDownloadCategories = async (req, res) => {
     try {
@@ -44,7 +45,7 @@ const createDownloadCategory = async(req, res) => {
 
         const downloadCategory = await DownloadCategory.create(downloadCategoryData);
 
-        res.statut(201).json(downloadCategory); 
+        res.status(201).json(downloadCategory); 
         
     } catch (error) {
         console.log(error);
