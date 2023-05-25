@@ -79,7 +79,7 @@ const updateRole = async(req, res) => {
 const deleteRole = async (req, res) => {
     try {
         const deletedRole = await Role.findOne({
-            where: {id: request.params.id}
+            where: {id: req.params.id}
         }); 
 
 

@@ -86,7 +86,7 @@ const updateCategory = async(req, res) => {
 const deleteCategory = async (req, res) => {
     try {
         const deletedCategory = await FaqCategory.findOne({
-            where: {id: request.params.id}
+            where: {id: req.params.id}
         }); 
 
 

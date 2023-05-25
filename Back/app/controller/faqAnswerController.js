@@ -87,7 +87,7 @@ const updateFaqAnswer = async(req, res) => {
 const deleteFaqAnswer = async (req, res) => {
     try {
         const deletedFaqAnswer = await FaqAnswer.findOne({
-            where: {id: request.params.id}
+            where: {id: req.params.id}
         }); 
 
 

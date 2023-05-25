@@ -102,7 +102,7 @@ const updateDocumentationFile = async(req, res) => {
 const deleteDocumentationFile = async (req, res) => {
     try {
         const deletedDocumentationFile = await DocumentationFile.findOne({
-            where: {id: request.params.id}
+            where: {id: req.params.id}
         }); 
 
 

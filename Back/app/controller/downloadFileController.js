@@ -102,7 +102,7 @@ const updateDownloadFile = async(req, res) => {
 const deleteDownloadFile = async (req, res) => {
     try {
         const deletedDownloadFile = await DownloadFile.findOne({
-            where: {id: request.params.id}
+            where: {id: req.params.id}
         }); 
 
 

@@ -91,7 +91,7 @@ const updateCategory = async(req, res) => {
 const deleteCategory = async (req, res) => {
     try {
         const deletedCategory = await DocumentationCategory.findOne({
-            where: {id: request.params.id}
+            where: {id: req.params.id}
         }); 
 
 
