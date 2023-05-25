@@ -1,5 +1,6 @@
-import DownloadFile from "../models/downloadFile.js";
 import {} from "../models/index.js";
+import DownloadFile from "../models/downloadFile.js";
+import DownloadCategory from "../models/downloadCategory.js";
 
 const getAllDownloadFiles = async (req, res) => {
     try {
@@ -49,7 +50,7 @@ const createDownloadFile = async(req, res) => {
 
         const downloadFile = await DownloadFile.create(downloadFileData);
 
-        res.statut(201).json(downloadFile); 
+        res.status(201).json(downloadFile); 
         
     } catch (error) {
         console.log(error);
@@ -120,10 +121,81 @@ const deleteDownloadFile = async (req, res) => {
     }
 }
 
+const associateDlCategory = async(req, res) => {
+    
+    const downloadId = req.params.dlId;
+    const categoryDlId = req.params.catDlId;
+    
+    try {
+        
+        const download = await DownloadFile.findByPk(downloadId, {
+            include: "dlCategories"
+        });
+
+        const categoryDownload = await DownloadCategory.findByPk(categoryDlId);
+
+        if (!download) {
+            res.status(404).json({
+                error: "Pas de fichier à cet id"
+            });
+            return;
+        }
+
+        if (!categoryDownload) {
+            res.status(404).json({
+                error: "Pas de catégorie à cet id"
+            });
+            return;
+        }
+
+        await download.addDlCategories(categoryDownload);
+        res.json({data: download}); 
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error });
+    }
+}
+
+const dissociateDlCategory = async(req, res) => {
+    
+    const downloadId = req.params.dlId;
+    const categoryDlId = req.params.catDlId;
+
+    try {
+        const download = await DownloadFile.findByPk(downloadId)
+
+        const categoryDownload = await DownloadCategory.findByPk(categoryDlId);
+
+        if (!download) {
+            res.status(404).json({
+                error: "Pas de documentation à cet id"
+            });
+            return;
+        }
+
+        if (!categoryDownload) {
+            res.status(404).json({
+                error: "Pas de catégorie à cet id"
+            });
+            return;
+        }
+
+        await download.removeDlCategories(categoryDownload);
+        res.json({data: download}); 
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error });
+    }
+}
+
 export default {
     getAllDownloadFiles,
     getOneDownloadFile, 
     createDownloadFile, 
     updateDownloadFile,
-    deleteDownloadFile
+    deleteDownloadFile,
+    associateDlCategory,
+    dissociateDlCategory
 }
