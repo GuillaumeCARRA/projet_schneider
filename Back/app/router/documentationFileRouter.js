@@ -11,7 +11,8 @@ router.post('/', documentationFileController.createDocumentationFile);
 router.patch('/:id(\\d+)', documentationFileController.updateDocumentationFile);
 router.delete('/:id(\\d+)', documentationFileController.deleteDocumentationFile);
 
-router.patch('/:id(\\d+)/doc/:id(\\d+)', documentationFileController.associateCategory);
+router.patch('/:docId/doc/:catId', documentationFileController.associateCategory);
+router.delete('/:docId/doc/:catId', documentationFileController.dissociateCategory);
 
 
 
