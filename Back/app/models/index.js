@@ -1,3 +1,4 @@
+//import sequelize from "../db/client.js";
 import DocumentationCategory from "./documentationCategory.js";
 import DocumentationFile from "./documentationFile.js"; 
 import DownloadCategory from "./downloadCategory.js";
@@ -127,6 +128,9 @@ FaqAsk.belongsToMany(FaqCategory, {
 });
 
 /** END RELATION N - N */
+
+// Enregistrement des associations dans Sequelize
+//sequelize.sync();
 
 export default {
     FaqAsk, 

@@ -1,5 +1,6 @@
-import DocumentationCategory from "../models/documentationCategory.js";
 import {} from "../models/index.js";
+import DocumentationCategory from "../models/documentationCategory.js";
+
 
 const getAllDocumentationCategories = async (req, res) => {
     try {

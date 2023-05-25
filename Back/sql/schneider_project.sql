@@ -26,7 +26,6 @@ CREATE TABLE "documentation_file" (
     "documentation_file_format" TEXT NOT NULL,
     "documentation_file_img" BYTEA NOT NULL, 
     "documentation_file_size" INT NOT NULL,
-    "documentation_category_id" INT REFERENCES "documentation_category"("id")
 );  
 
 CREATE TABLE "download_category" (
@@ -40,7 +39,7 @@ CREATE TABLE "download_file" (
     "download_file_format" TEXT NOT NULL, 
     "download_file_img" BYTEA NOT NULL,
     "downdload_file_size" INT NOT NULL, 
-    "download_category_id" INT REFERENCES "download_category"("id")
+    --"download_category_id" INT REFERENCES "download_category"("id")--
 );
 
 CREATE TABLE "faq_answer" (

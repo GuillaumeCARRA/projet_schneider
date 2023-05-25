@@ -14,7 +14,7 @@ DocumentationFile.init(
         documentation_file_format: DataTypes.STRING,
         documentation_file_img: DataTypes.BLOB, 
         documentation_file_size: DataTypes.INTEGER,
-        documentation_category_id: DataTypes.INTEGER
+        //documentation_category_id: DataTypes.INTEGER
     },
 
     {
