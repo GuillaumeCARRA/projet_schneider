@@ -1,5 +1,7 @@
-import DocumentationFile from "../models/documentationFile.js";
 import {} from "../models/index.js";
+import DocumentationFile from "../models/documentationFile.js";
+import DocumentationCategory from "../models/documentationCategory.js"; 
+
 
 const getAllDocumentationFiles = async (req, res) => {
     try {
@@ -38,11 +40,11 @@ const getOneDocumentationFile = async (req, res) => {
 const createDocumentationFile = async(req, res) => {
     
     const documentationFileData = {
-        documentation_file_name: req.body.documentation_category_name,
+        documentation_file_name: req.body.documentation_file_name,
         documentation_file_format: req.body.documentation_file_format,
         documentation_file_img: req.body.documentation_file_img,
         documentation_file_size: req.body.documentation_file_size,
-        documentation_category_id: req.body.documentation_file_size
+        //documentation_category_id: req.body.documentation_category_id
     }
     
     try {
@@ -120,10 +122,46 @@ const deleteDocumentationFile = async (req, res) => {
     }
 }
 
+const associateCategory = async(req, res) => {
+    
+    const documentationId = req.params.id;
+    const categoryId = req.params.id;
+    
+    try {
+        
+        const doc = await DocumentationFile.findByPk(documentationId, {
+            include: "categories"
+        });
+
+        const category = await DocumentationCategory.findByPk(categoryId);
+
+        if (!doc) {
+            response.status(404).json({
+                error: "Pas de documentation à cet id"
+            });
+            return;
+        }
+
+        if (!category) {
+            response.status(404).json({
+                error: "Pas de catégorie à cet id"
+            });
+            return;
+        }
+
+        await doc.addCategories(category);
+        res.json({data: doc}); 
+
+    } catch (error) {
+        
+    }
+}
+
 export default {
     getAllDocumentationFiles,
     getOneDocumentationFile, 
     createDocumentationFile, 
     updateDocumentationFile,
-    deleteDocumentationFile
+    deleteDocumentationFile,
+    associateCategory
 }

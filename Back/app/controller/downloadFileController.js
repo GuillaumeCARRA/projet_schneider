@@ -42,7 +42,7 @@ const createDownloadFile = async(req, res) => {
         download_file_format: req.body.download_file_format,
         download_file_img: req.body.download_file_img,
         downdload_file_size: req.body.downdload_file_size,
-        download_category_id: req.body.download_category_id
+        //download_category_id: req.body.download_category_id
     }
     
     try {
