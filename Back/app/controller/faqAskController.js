@@ -1,5 +1,7 @@
-import FaqAsk from "../models/faqAsk.js";
 import {} from "../models/index.js";
+import FaqAsk from "../models/faqAsk.js";
+import FaqCategory from "../models/faqCategory.js";
+
 
 const getAllFaqAsks = async (req, res) => {
     try {
@@ -108,10 +110,81 @@ const deleteFaqAsk = async (req, res) => {
     }
 }
 
+const associateFaqCategory= async (req, res) => {
+    const faqId = req.params.faqId; 
+    const faqCategoryId = req.params.faqCatId; 
+
+    try {
+
+        const faq = await FaqAsk.findByPk(faqId, {
+            include: "faqCategories"
+        });
+
+        const faqCat = await FaqCategory.findByPk(faqCategoryId);
+
+        if (!faq) {
+            res.status(404).json({
+                error: "Pas de question à cet id"
+            });
+            return;
+        }
+
+        if (!faqCat) {
+            res.status(404).json({
+                error: "Pas de catégorie à cet id"
+            });
+            return;
+        }
+
+        await faq.addFaqCategories(faqCat);
+        res.json({data: faq});
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error });
+    }
+}
+
+const dissociateFaqCategory = async (req, res) => {
+    
+    const faqId = req.params.faqId; 
+    const faqCategoryId = req.params.faqCatId; 
+    
+    try {
+
+        const faq = await FaqAsk.findByPk(faqId);
+
+        const faqCat = await FaqCategory.findByPk(faqCategoryId);
+        
+        if (!faq) {
+            res.status(404).json({
+                error: "Pas de question à cet id"
+            });
+            return;
+        }
+
+        if (!faqCat) {
+            res.status(404).json({
+                error: "Pas de catégorie à cet id"
+            });
+            return;
+        }
+
+        await faq.removeFaqCategories(faqCat);
+        res.json({data: faq});
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error });
+    }
+}
+
 export default {
     getAllFaqAsks, 
     getOneFaqAsk, 
     createFaqAsk, 
     updateFaqAsk,
-    deleteFaqAsk
+    deleteFaqAsk,
+    associateFaqCategory,
+    dissociateFaqCategory
 }

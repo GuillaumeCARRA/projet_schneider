@@ -10,8 +10,8 @@ router.post('/', faqAskController.createFaqAsk);
 router.patch('/:id(\\d+)', faqAskController.updateFaqAsk);
 router.delete('/:id(\\d+)', faqAskController.deleteFaqAsk);
 
-//router.patch('/:dlId/download/:catDlId', downloadFileController.associateDlCategory);
-//router.delete('/:dlId/download/:catDlId', downloadFileController.dissociateDlCategory);
+router.patch('/:faqId/download/:faqCatId', faqAskController.associateFaqCategory);
+router.delete('/:faqId/download/:faqCatId', faqAskController.dissociateFaqCategory);
 
 
 export default router; 
