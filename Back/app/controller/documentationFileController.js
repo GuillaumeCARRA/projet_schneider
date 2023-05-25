@@ -124,8 +124,8 @@ const deleteDocumentationFile = async (req, res) => {
 
 const associateCategory = async(req, res) => {
     
-    const documentationId = req.params.id;
-    const categoryId = req.params.id;
+    const documentationId = req.params.docId;
+    const categoryId = req.params.catId;
     
     try {
         
@@ -136,14 +136,14 @@ const associateCategory = async(req, res) => {
         const category = await DocumentationCategory.findByPk(categoryId);
 
         if (!doc) {
-            response.status(404).json({
+            res.status(404).json({
                 error: "Pas de documentation à cet id"
             });
             return;
         }
 
         if (!category) {
-            response.status(404).json({
+            res.status(404).json({
                 error: "Pas de catégorie à cet id"
             });
             return;
@@ -153,15 +153,49 @@ const associateCategory = async(req, res) => {
         res.json({data: doc}); 
 
     } catch (error) {
-        
+        console.log(error);
+        res.status(500).json({ error });
     }
 }
 
+const dissociateCategory = async(req, res) => {
+    const documentationId = req.params.docId;
+    const categoryId = req.params.catId;
+
+    try {
+        const doc = await DocumentationFile.findByPk(documentationId)
+
+        const category = await DocumentationCategory.findByPk(categoryId);
+
+        if (!doc) {
+            res.status(404).json({
+                error: "Pas de documentation à cet id"
+            });
+            return;
+        }
+
+        if (!category) {
+            res.status(404).json({
+                error: "Pas de catégorie à cet id"
+            });
+            return;
+        }
+
+        await doc.removeCategories(category);
+        res.json({data: doc}); 
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error });
+    }
+}
+ 
 export default {
     getAllDocumentationFiles,
     getOneDocumentationFile, 
     createDocumentationFile, 
     updateDocumentationFile,
     deleteDocumentationFile,
-    associateCategory
+    associateCategory,
+    dissociateCategory
 }
