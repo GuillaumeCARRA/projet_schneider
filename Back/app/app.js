@@ -8,9 +8,17 @@ import {} from "dotenv/config";
 const app = express(); 
 
 //import routes
-app.get('/', (request, response) => {
-    response.send("Hello World");
-});
+//app.get('/', (request, response) => {
+    //response.send("Hello World");
+//});
+
+import router from './router/index.js'; 
+
+app.use(express.urlencoded({extended: true}));
+
+app.use(express.json()); 
+
+app.use(router); 
 
 const PORT = process.env.PORT || 4000; 
 app.listen(PORT, () => {

@@ -1,4 +1,5 @@
 import FaqCategory from "../models/faqCategory.js"; 
+import {} from "../models/index.js";
 
 const getAllFaqCategories = async (req, res) => {
     try {
@@ -44,7 +45,7 @@ const createFaqCategory = async(req, res) => {
 
         const faqCategory = await FaqCategory.create(faqCategoryData);
 
-        res.statut(201).json(faqCategory); 
+        res.status(201).json(faqCategory); 
         
     } catch (error) {
         console.log(error);

@@ -1,4 +1,5 @@
 import FaqAnswer from "../models/faqAnswer.js";
+import {} from "../models/index.js";
 
 
 const getAllFaqAnswers = async (req, res) => {
@@ -45,7 +46,7 @@ const createFaqAnswer = async(req, res) => {
 
         const faqAnswer = await FaqAnswer.create(faqAnswerData);
 
-        res.statut(201).json(faqAnswer); 
+        res.status(201).json(faqAnswer); 
         
     } catch (error) {
         console.log(error);

@@ -1,4 +1,5 @@
 import DocumentationFile from "../models/documentationFile.js";
+import {} from "../models/index.js";
 
 const getAllDocumentationFiles = async (req, res) => {
     try {
@@ -48,7 +49,7 @@ const createDocumentationFile = async(req, res) => {
 
         const documentationFile = await DocumentationFile.create(documentationFileData);
 
-        res.statut(201).json(documentationFile); 
+        res.status(201).json(documentationFile); 
         
     } catch (error) {
         console.log(error);

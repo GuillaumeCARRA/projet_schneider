@@ -1,4 +1,5 @@
 import Role from "../models/role.js";
+import {} from "../models/index.js";
 
 const getAllRoles = async (req, res) => {
     try {
@@ -37,7 +38,7 @@ const createRole = async(req, res) => {
 
         const role = await Role.create(roleData);
 
-        res.statut(201).json(role); 
+        res.status(201).json(role); 
         
     } catch (error) {
         console.log(error);

@@ -1,4 +1,5 @@
 import DocumentationCategory from "../models/documentationCategory.js";
+import {} from "../models/index.js";
 
 const getAllDocumentationCategories = async (req, res) => {
     try {
@@ -44,7 +45,7 @@ const createDocumentationCategory = async(req, res) => {
 
         const documentationCategory = await DocumentationCategory.create(documentationCategoryData);
 
-        res.statut(201).json(documentationCategory); 
+        res.status(201).json(documentationCategory); 
         
     } catch (error) {
         console.log(error);
