@@ -97,7 +97,7 @@ const updateProductOrder = async(req, res) => {
 const deleteProductOrder = async (req, res) => {
     try {
         const deletedProductOrder = await ProductOrder.findOne({
-            where: {id: request.params.id}
+            where: {id: req.params.id}
         }); 
 
 
