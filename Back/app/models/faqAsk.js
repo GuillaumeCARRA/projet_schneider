@@ -6,9 +6,9 @@ class FaqAsk extends Model{};
 
 FaqAsk.init(
     {
-        ask: DataTypes.STRING,
-        faq_answer_id: DataTypes.INTEGER,
-        faq_category_id: DataTypes.INTEGER
+        ask: DataTypes.STRING
+        // faq_answer_id: DataTypes.INTEGER,
+        // faq_category_id: DataTypes.INTEGER
     },
 
     {

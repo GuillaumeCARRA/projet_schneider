@@ -47,8 +47,8 @@ const createFaqAsk = async(req, res) => {
     
     const faqAskData = {
         ask: req.body.ask,
-        faq_answer_id: req.body.faq_answer_id,
-        faq_category_id: req.body.faq_category_id
+        // faq_answer_id: req.body.faq_answer_id, 
+        // faq_category_id: req.body.faq_category_id
     }
     
     try {
@@ -76,11 +76,21 @@ const updateFaqAsk = async(req, res) => {
 
         const {
             ask
+            // faq_answer_id, 
+            // faq_category_id
         } = req.body
 
         if(ask) {
             updatedFaqAsk.ask = ask; 
         }
+
+        // if(faq_answer_id) {
+        //     updatedFaqAsk.faq_answer_id = faq_answer_id;
+        // }
+
+        // if(faq_category_id) {
+        //     updatedFaqAsk.faq_category_id = faq_category_id;
+        // }
 
         await updatedFaqAsk.save();
 

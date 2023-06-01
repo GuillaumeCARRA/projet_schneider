@@ -43,7 +43,8 @@ const getOneFaqAnswer = async (req, res) => {
 const createFaqAnswer = async(req, res) => {
     
     const faqAnswerData = {
-        answer: req.body.answer
+        answer: req.body.answer, 
+        faq_ask_id: req.body.faq_ask_id
     }
     
     try {
@@ -70,11 +71,16 @@ const updateFaqAnswer = async(req, res) => {
         }
 
         const {
-            answer
+            answer, 
+            faq_ask_id
         } = req.body
 
         if(answer) {
             updatedFaqAnswer.answer = answer; 
+        }
+
+        if(faq_ask_id) {
+            updatedFaqAnswer.faq_ask_id = faq_ask_id; 
         }
 
         await updatedFaqAnswer.save();
