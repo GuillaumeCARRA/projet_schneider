@@ -9,7 +9,8 @@ const getAllDownloadCategories = async (req, res) => {
             ]
         });
 
-        res.json({data: downloadCategories}); 
+      
+        return res.json({data: downloadCategories});
     } catch (error) {
         console.log(error);
         res.status(500).json({error}); 
@@ -27,7 +28,11 @@ const getOneDownloadCategory = async (req, res) => {
             ]
         });
 
-        res.json({data: oneCategory}); 
+        if(!oneCategory) {
+            return res.status(404).json({error: "pas de catégorie à cet id"})
+        } else {
+            return res.json({data: oneCategory}); 
+        }
 
     } catch (error) {
         console.log(error);

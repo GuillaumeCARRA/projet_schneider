@@ -9,10 +9,10 @@ const getAllFaqCategories = async (req, res) => {
             ]
         });
 
-        res.json({data: faqCategories}); 
+        return res.json({data: faqCategories}); 
     } catch (error) {
         console.log(error);
-        res.status(500).json({error}); 
+        return res.status(500).json({error}); 
     }
 }
 
@@ -27,11 +27,17 @@ const getOneFaqCategory = async (req, res) => {
             ]
         });
 
-        res.json({data: oneFaqCategory}); 
+        if(!oneFaqCategory) {
+            return res.status(404).json({error: "pas de catégorie à cet id"});
+        } else {
+            return res.json({data: oneFaqCategory});
+        }
+
+         
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({error}); 
+        return res.status(500).json({error}); 
     }
 }
 
@@ -45,7 +51,7 @@ const createFaqCategory = async(req, res) => {
 
         const faqCategory = await FaqCategory.create(faqCategoryData);
 
-        res.status(201).json(faqCategory); 
+        return res.status(201).json(faqCategory); 
         
     } catch (error) {
         console.log(error);
@@ -74,7 +80,7 @@ const updateCategory = async(req, res) => {
 
         await updatedFaqCategory.save();
 
-        res.json({data: updatedFaqCategory});
+        return res.json({data: updatedFaqCategory});
         
     } catch (error) {
         console.log(error);
@@ -96,11 +102,11 @@ const deleteCategory = async (req, res) => {
 
         await deletedCategory.destroy();
 
-        res.json({data: deletedCategory});
+        return res.json({data: deletedCategory});
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error });
+        return res.status(500).json({ error });
     }
 }
 

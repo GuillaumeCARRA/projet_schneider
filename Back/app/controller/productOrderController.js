@@ -9,10 +9,10 @@ const getAllProductsOrders = async (req, res) => {
             ]
         });
 
-        res.json({data: productsOrders}); 
+       return res.json({data: productsOrders}); 
     } catch (error) {
         console.log(error);
-        res.status(500).json({error}); 
+       return res.status(500).json({error}); 
     }
 }
 
@@ -27,11 +27,15 @@ const getOneProductOrder = async (req, res) => {
             ]
         });
 
-        res.json({data: oneProductOrder}); 
+        if(!oneProductOrder) {
+            return res.json({error: "pas de commande à cet id"});   
+        } else {
+            return res.json({data: oneProductOrder});   
+        }
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({error}); 
+        return  res.status(500).json({error}); 
     }
 }
 
@@ -48,11 +52,11 @@ const createProductOrder = async(req, res) => {
 
         const productOrder = await ProductOrder.create(productOrderData);
 
-        res.status(201).json(productOrder); 
+        return res.status(201).json(productOrder); 
         
     } catch (error) {
         console.log(error);
-        res.status(500).json({error});
+        return res.status(500).json({error});
     }
 }
 
@@ -85,12 +89,12 @@ const updateProductOrder = async(req, res) => {
     
         await updatedProductOrder.save();
 
-        res.json({data: updatedProductOrder});
+        return res.json({data: updatedProductOrder});
         
     } catch (error) {
         console.log(error);
 
-        res.status(500).json({error});
+        return res.status(500).json({error});
     }
 }
 
@@ -111,7 +115,7 @@ const deleteProductOrder = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error });
+       return res.status(500).json({ error });
     }
 }
 

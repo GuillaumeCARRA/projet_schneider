@@ -9,10 +9,10 @@ const getAllOrderHistories = async (req, res) => {
             ]
         });
 
-        res.json({data: orderHistories}); 
+        return res.json({data: orderHistories}); 
     } catch (error) {
         console.log(error);
-        res.status(500).json({error}); 
+        return res.status(500).json({error}); 
     }
 }
 
@@ -27,11 +27,15 @@ const getOneOrderHistory = async (req, res) => {
             ]
         });
 
-        res.json({data: oneOrderHistory}); 
+        if(!oneOrderHistory) {
+            return res.status(404).json({error: "pas d'historique à cet id"})
+        } else {
+            return res.json({data: oneOrderHistory}); 
+        }
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({error}); 
+        return res.status(500).json({error}); 
     }
 }
 

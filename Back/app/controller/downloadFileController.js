@@ -10,10 +10,10 @@ const getAllDownloadFiles = async (req, res) => {
             ]
         });
 
-        res.json({data: downloadFiles}); 
+        return res.json({data: downloadFiles}); 
     } catch (error) {
         console.log(error);
-        res.status(500).json({error}); 
+        return res.status(500).json({error}); 
     }
 }
 
@@ -28,11 +28,15 @@ const getOneDownloadFile = async (req, res) => {
             ]
         });
 
-        res.json({data: oneDownload}); 
+        if(!oneDownload) {
+            return res.status.json({error: "pas de fichier à cet id"});
+        } else {
+            return res.json({data: oneDownload}); 
+        }
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({error}); 
+        return res.status(500).json({error}); 
     }
 }
 
@@ -50,11 +54,11 @@ const createDownloadFile = async(req, res) => {
 
         const downloadFile = await DownloadFile.create(downloadFileData);
 
-        res.status(201).json(downloadFile); 
+        return res.status(201).json(downloadFile); 
         
     } catch (error) {
         console.log(error);
-        res.status(500).json({error});
+        return res.status(500).json({error});
     }
 }
 
@@ -91,12 +95,12 @@ const updateDownloadFile = async(req, res) => {
     
         await updatedDownloadFile.save();
 
-        res.json({data: updatedDownloadFile});
+        return res.json({data: updatedDownloadFile});
         
     } catch (error) {
         console.log(error);
 
-        res.status(500).json({error});
+        return res.status(500).json({error});
     }
 }
 
@@ -113,11 +117,11 @@ const deleteDownloadFile = async (req, res) => {
 
         await deletedDownloadFile.destroy();
 
-        res.json({data: deletedDownloadFile});
+        return res.json({data: deletedDownloadFile});
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error });
+        return res.status(500).json({ error });
     }
 }
 
