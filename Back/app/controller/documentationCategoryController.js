@@ -10,10 +10,11 @@ const getAllDocumentationCategories = async (req, res) => {
             ]
         });
 
-        res.json({data: documentationCategories}); 
+
+        return res.json({data: documentationCategories}); 
     } catch (error) {
         console.log(error);
-        res.status(500).json({error}); 
+        return res.status(500).json({error}); 
     }
 }
 
@@ -28,8 +29,13 @@ const getOneDocumentationCategory = async (req, res) => {
             ]
         });
 
-        res.json({data: oneCategory}); 
+        if(!oneCategory) {
+            return res.status(404).json({error: "pas de catégorie à cet id"})
+        } else {
+            return res.json({data: oneCategory}); 
+        }
 
+        
     } catch (error) {
         console.log(error);
         res.status(500).json({error}); 

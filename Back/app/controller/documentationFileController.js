@@ -22,14 +22,20 @@ const getOneDocumentationFile = async (req, res) => {
     try {
         const documentationId = req.params.id; 
 
-        const oneCategory = await DocumentationFile.findOne({
+        const oneDocumentation = await DocumentationFile.findOne({
             where: ({id: documentationId}), 
             include: [
                 {association: "categories"}
             ]
         });
 
-        res.json({data: oneCategory}); 
+        if(!oneDocumentation) {
+            return res.status(404).json({error: "pas de documentation à cet id"})
+        } else {
+            return res.json({data: oneDocumentation});
+        }
+
+         
 
     } catch (error) {
         console.log(error);

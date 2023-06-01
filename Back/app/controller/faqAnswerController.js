@@ -10,10 +10,10 @@ const getAllFaqAnswers = async (req, res) => {
             ]
         });
 
-        res.json({data: faqAnswers}); 
+        return res.json({data: faqAnswers}); 
     } catch (error) {
         console.log(error);
-        res.status(500).json({error}); 
+        return res.status(500).json({error}); 
     }
 }
 
@@ -28,11 +28,15 @@ const getOneFaqAnswer = async (req, res) => {
             ]
         });
 
-        res.json({data: oneAnswer}); 
+        if(!oneAnswer) {
+            return res.status(404).json({error: "pas de réponse à cet id"});
+        } else {
+            return res.json({data: oneAnswer});    
+        }
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({error}); 
+        return res.status(500).json({error}); 
     }
 }
 
@@ -46,11 +50,11 @@ const createFaqAnswer = async(req, res) => {
 
         const faqAnswer = await FaqAnswer.create(faqAnswerData);
 
-        res.status(201).json(faqAnswer); 
+        return res.status(201).json(faqAnswer); 
         
     } catch (error) {
         console.log(error);
-        res.status(500).json({error});
+        return res.status(500).json({error});
     }
 }
 
@@ -75,12 +79,12 @@ const updateFaqAnswer = async(req, res) => {
 
         await updatedFaqAnswer.save();
 
-        res.json({data: updatedFaqAnswer});
+        return res.json({data: updatedFaqAnswer});
         
     } catch (error) {
         console.log(error);
 
-        res.status(500).json({error});
+        return res.status(500).json({error});
     }
 }
 
@@ -97,11 +101,11 @@ const deleteFaqAnswer = async (req, res) => {
 
         await deletedFaqAnswer.destroy();
 
-        res.json({data: deletedFaqAnswer});
+        return res.json({data: deletedFaqAnswer});
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error });
+        return res.status(500).json({ error });
     }
 }
 

@@ -9,7 +9,7 @@ const getAllProducts = async (req, res) => {
             ]
         });
 
-        res.json({data: products}); 
+       return res.json({data: products}); 
     } catch (error) {
         console.log(error);
         res.status(500).json({error}); 
@@ -27,11 +27,16 @@ const getOneProduct = async (req, res) => {
             ]
         });
 
-        res.json({data: oneProduct}); 
+        if(!oneProduct) {
+            return res.status(404).json({error: "pas de produit à cet id"})
+        } else {
+            return res.json({data: oneProduct}); 
 
+        }
+        
     } catch (error) {
         console.log(error);
-        res.status(500).json({error}); 
+        return res.status(500).json({error}); 
     }
 }
 
@@ -48,11 +53,11 @@ const createProduct = async(req, res) => {
 
         const product = await Product.create(productData);
 
-        res.status(201).json(product); 
+        return res.status(201).json(product); 
         
     } catch (error) {
         console.log(error);
-        res.status(500).json({error});
+        return res.status(500).json({error});
     }
 }
 
@@ -94,7 +99,7 @@ const updateProduct = async(req, res) => {
     } catch (error) {
         console.log(error);
 
-        res.status(500).json({error});
+        return res.status(500).json({error});
     }
 }
 
@@ -111,11 +116,11 @@ const deleteProduct = async (req, res) => {
 
         await deletedProduct.destroy();
 
-        res.json({data: deletedProduct});
+        return res.json({data: deletedProduct});
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error });
+        return res.status(500).json({ error });
     }
 }
 

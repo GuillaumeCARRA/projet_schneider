@@ -12,10 +12,10 @@ const getAllFaqAsks = async (req, res) => {
             ]
         });
 
-        res.json({data: faqAsks}); 
+        return res.json({data: faqAsks}); 
     } catch (error) {
         console.log(error);
-        res.status(500).json({error}); 
+        return res.status(500).json({error}); 
     }
 }
 
@@ -31,7 +31,11 @@ const getOneFaqAsk = async (req, res) => {
             ]
         });
 
-        res.json({data: oneAsk}); 
+        if(!oneAsk) {
+            return res.status(404).json({error: "pas de question à cet id"});
+        } else {
+            return res.json({data: oneAsk}); 
+        }
 
     } catch (error) {
         console.log(error);
@@ -51,11 +55,11 @@ const createFaqAsk = async(req, res) => {
 
         const faqAsk = await FaqAsk.create(faqAskData);
 
-        res.status(201).json(faqAsk); 
+        return res.status(201).json(faqAsk); 
         
     } catch (error) {
         console.log(error);
-        res.status(500).json({error});
+       return res.status(500).json({error});
     }
 }
 
@@ -80,12 +84,12 @@ const updateFaqAsk = async(req, res) => {
 
         await updatedFaqAsk.save();
 
-        res.json({data: updatedFaqAsk});
+       return res.json({data: updatedFaqAsk});
         
     } catch (error) {
         console.log(error);
 
-        res.status(500).json({error});
+        return res.status(500).json({error});
     }
 }
 
@@ -102,11 +106,11 @@ const deleteFaqAsk = async (req, res) => {
 
         await deletedFaqAsk.destroy();
 
-        res.json({data: deletedFaqAsk});
+       return res.json({data: deletedFaqAsk});
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error });
+        return res.status(500).json({ error });
     }
 }
 
@@ -141,7 +145,7 @@ const associateFaqCategory= async (req, res) => {
         
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error });
+       return res.status(500).json({ error });
     }
 }
 
@@ -171,11 +175,11 @@ const dissociateFaqCategory = async (req, res) => {
         }
 
         await faq.removeFaqCategories(faqCat);
-        res.json({data: faq});
+       return res.json({data: faq});
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({ error });
+       return res.status(500).json({ error });
     }
 }
 
