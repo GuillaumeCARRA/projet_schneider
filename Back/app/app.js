@@ -8,10 +8,6 @@ import {} from "dotenv/config";
 const app = express(); 
 
 //import routes
-//app.get('/', (request, response) => {
-    //response.send("Hello World");
-//});
-
 import router from './router/index.js'; 
 
 app.use(express.urlencoded({extended: true}));
