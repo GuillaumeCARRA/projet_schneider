@@ -11,7 +11,7 @@
 }
 
 .navbar__logo {
-
+    margin-left: 10px;
 }
 
 .navbar__list {
@@ -24,9 +24,14 @@
 
 .navbar__item {
     margin-right: 20px;
-    cursor: pointer;
+    font-weight: bold;
+    color: black
 }
 
 .navbar__link {
+    cursor: pointer;
+}
 
+a.navbar__link {
+    color: black;
 }
