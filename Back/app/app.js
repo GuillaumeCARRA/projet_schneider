@@ -10,13 +10,18 @@ const app = express();
 //import routes
 import router from './router/index.js'; 
 
+// Middleware pour traiter les données provenant d'un formulaire HTML
 app.use(express.urlencoded({extended: true}));
 
-app.use(express.json()); 
+// Middleware pour traiter les données JSON
+app.use(express.json());
 
-app.use(router); 
+// Utilisation du routeur pour gérer les routes
+app.use(router);
 
-const PORT = process.env.PORT || 4000; 
+// Définition du port sur lequel le serveur va écouter
+const PORT = process.env.PORT || 4000;
+// Démarrage du serveur en écoutant le port spécifié
 app.listen(PORT, () => {
-    console.log(`Server listening on ${PORT}`);
+    console.log(`Serveur à l'écoute sur le port ${PORT}`);
 });
