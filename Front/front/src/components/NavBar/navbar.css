@@ -10,8 +10,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
-    margin: -30px;
-    /* background-color: red; */
+    margin-top: -35px;
 }
 
 .navbar__logo {
@@ -51,4 +50,4 @@ a.navbar__link:hover {
 
 .navbar__list li:first-child .navbar__link {
     color:  #3DCD58; 
-  }
+}
