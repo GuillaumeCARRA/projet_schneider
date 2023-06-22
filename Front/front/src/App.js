@@ -1,11 +1,13 @@
-import NavBar from './components/NavBar/index.js';
-// import HomePage from './components/HomePage/index.js'; 
+import React from 'react'; 
+
+import NavBar from './components/NavBar';
+import HomePage from './components/HomePage';
 
 function App() {
   return (
     <div className="App">
-        <NavBar />
-        {/* <HomePage /> */}
+      <NavBar />
+      <HomePage />
     </div>
   );
 }
