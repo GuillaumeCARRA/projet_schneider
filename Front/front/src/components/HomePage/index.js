@@ -1,5 +1,9 @@
 import React, {useState} from 'react';
 
+//import component
+import Footer from '../Footer/index.js'; 
+
+//import images
 import image from "../../assets/images/logoSE.png"
 import se from "../../assets/images/Schneider_Electric.jpg"
 
@@ -162,6 +166,7 @@ function HomePage() {
                 </div>
                 {/* HOMEPAGE FAQ END */}
            </div>
+           <Footer />
         </div>
     )
 }
