@@ -31,7 +31,8 @@
 .navbar__item {
     margin-right: 25px;
     font-weight: bold;
-    color: black
+    color: black;
+    font-size: 1.2rem;
 }
 
 .navbar__link {
