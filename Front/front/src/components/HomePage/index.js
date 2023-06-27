@@ -26,9 +26,9 @@ function HomePage() {
     };
 
     const asks = [
-        { asking: 'Question 1', answer: 'Réponse à la question 1' },
-        { asking: 'Question 2', answer: 'Réponse à la question 2' },
-        { asking: 'Question 3', answer: 'Réponse à la question 3' },
+        { asking: 'Quelles sont les questions les plus fréquentes ?', answer: 'Réponse à la question 1' },
+        { asking: 'Quelles sont les questions les plus fréquentes ?', answer: 'Réponse à la question 2' },
+        { asking: 'Quelles sont les questions les plus fréquentes ?', answer: 'Réponse à la question 3' },
     ];
 
     return (
@@ -154,8 +154,12 @@ function HomePage() {
                             {
                                 //Boucle map qui itère sur chaque élément du tableau asks
                                 asks.map((ask, index) => (
-                                    <div key={index} className='homepage__faq-ask'> 
-                                        <h3 onClick={() => toggleAsk(index)}>{ask.asking}</h3>
+                                    <div 
+                                        key={index} 
+                                        className='homepage__faq-ask'
+                                        onClick={() => toggleAsk(index)}
+                                    > 
+                                        <h3>{ask.asking}</h3>
                                         {/* Condition qui vérifie si l'élément à l'index spécifié est ouvert (true) ou fermé (false) */}
                                         {/* Si l'élément est ouvert, affiche le paragraphe contenant la réponse ask.answer */}
                                         {askOpen[index] && <p className='homepage__faq-answer'>{ask.answer}</p>}
