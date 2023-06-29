@@ -41,12 +41,13 @@
 
 a.navbar__link {
     color: black;
+    &:hover{
+        color: #3DCD58; 
+    }
 }
 
-a.navbar__link:hover {
-    color: #3DCD58; 
-}
-
-.navbar__list li:first-child .navbar__link {
-    color:  #3DCD58; 
+.navbar__list {
+    > li:first-child > .navbar__link {
+        color: #3DCD58;
+    }
 }

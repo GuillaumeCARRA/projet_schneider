@@ -1,0 +1,35 @@
+.footer{
+    width: 100%;
+    height: 100px;
+}
+
+.footer__container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+}
+
+.footer__items{
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+
+.footer__item {
+    margin-left: 45px;
+}
+
+.footer__link{
+    cursor: pointer;
+}
+
+a.footer__link{
+    color: black; 
+}
+
+.footer__se{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
