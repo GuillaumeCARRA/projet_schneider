@@ -1,3 +1,36 @@
 .solutions {
+    width: 100%;
+    height: 100vh;
+}
+
+.solutions__container {
     /* background-color: red; */
+}
+
+.solutions__title {
+
+}
+
+.solutions__content {
+
+}
+
+.solutions__img {
+
+}
+
+.solutions__name {
+
+}
+
+.solutions__description {
+
+}
+
+.solutions__price {
+
+}
+
+.solutions__btn {
+    
 }

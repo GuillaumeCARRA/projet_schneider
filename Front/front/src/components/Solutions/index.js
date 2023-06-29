@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import instance from "../../axios.js"
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 import './solutions.css'; 
 
@@ -8,7 +8,7 @@ function Solutions () {
 
     // stock les données récupérées depuis le backend
     const [products, setProducts] = useState([]);
-    console.log("products", products)
+    console.log("products", products);
 
     // me permet d'effectuer une requête HTTP vers mon back
     // lors du chargement de mon composant
@@ -16,12 +16,12 @@ function Solutions () {
         // Fonction asynchrone pour récupérer les produits
         const fetchProducts = async () => {
             try {
-                // Effectue une requête à l'API pour obtenir les produits
+                // Effectue une requête à l'API back pour obtenir les produits
                 const response = await instance.get('/product');
-                console.log("response", response);
+                console.log("response", response.data.data);
 
                 // Met à jour l'état "products" avec les données reçues
-                setProducts(response.data.data)
+                setProducts(response.data.data[0]);
             } catch (error) {
                 console.log("err", error);
             }
@@ -36,20 +36,50 @@ function Solutions () {
 
     return (
         <div className='solutions'>
-            <h1>Nos Solutions</h1>
-            <ul>
-                {products.map((product) => {
-                    console.log("product inside map", product);
-                    return (
-                        <li key={product.id}>
-                            <p>{product.product_name}</p>
-                            <p>{product.product_description}</p>
-                            <p>{product.product_price}</p>
-                            <img src={product.product_img}/>
-                        </li>
-                    );
-                })}
-            </ul>
+            <div className='solutions__container'>
+                <h1 className='solutions__title'>Nos Solutions</h1>
+                    {/* {products.map((product) => (
+                        <div>
+                        <img src={product.product_img} alt="photo produit"/>
+                            <li key={product.id}>
+                                <p>{product.product_name}</p>
+                                <p>{product.product_description}</p>
+                                <p>{product.product_price}</p>
+                            </li>
+                        </div>
+                    ))} */}
+                    {products && (
+                        <div className='solutions__content'>
+                            <img 
+                                src={products.product_img} 
+                                alt="photo produit"
+                                className='solutions__img'
+                            />
+                            <div className='solutions__info'>
+                                <p 
+                                    className='solutions__name'
+                                >
+                                    {products.product_name}
+                                </p>
+                                <p 
+                                    className='solutions__description'
+                                >
+                                    {products.product_description}
+                                </p>
+                                <p 
+                                    className='solutions__price'
+                                >
+                                    {products.product_price}
+                                </p>
+                            </div>
+                            <button 
+                                className='solutions__btn'
+                            >
+                                commander
+                            </button>
+                        </div>
+                    )}
+            </div>
         </div>
     )
 }
