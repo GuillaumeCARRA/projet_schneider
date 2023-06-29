@@ -4,6 +4,8 @@ import express from "express";
 //import env variables
 import {} from "dotenv/config"; 
 
+import cors from "cors";
+
 //create express server
 const app = express(); 
 
@@ -15,6 +17,13 @@ app.use(express.urlencoded({extended: true}));
 
 // Middleware pour traiter les données JSON
 app.use(express.json());
+
+app.use(cors({
+    origin: '*',
+    methods: 'GET,POST,PATCH,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type'
+}));
+
 
 // Utilisation du routeur pour gérer les routes
 app.use(router);
