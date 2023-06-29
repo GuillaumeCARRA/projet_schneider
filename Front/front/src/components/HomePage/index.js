@@ -167,7 +167,7 @@ function HomePage() {
                                 ))
                             }
                         </div>
-                </div>
+                </div> 
                 {/* HOMEPAGE FAQ END */}
            </div>
            <Footer />
