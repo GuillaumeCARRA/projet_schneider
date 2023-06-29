@@ -16,7 +16,6 @@ function HomePage() {
       
     //Fonction toggleAsk qui permet de basculer l'état d'ouverture pour un élément donné
     const toggleAsk = (index) => {
-        console.log("index", index);
         //Créer une copie du tableau askOpen
         const updatedAsksOpen = [...askOpen];
         //Inverse la valeur d'ouverture pour l'élément à l'index spécifié
@@ -29,6 +28,7 @@ function HomePage() {
         { asking: 'Quelles sont les questions les plus fréquentes ?', answer: 'Réponse à la question 1' },
         { asking: 'Quelles sont les questions les plus fréquentes ?', answer: 'Réponse à la question 2' },
         { asking: 'Quelles sont les questions les plus fréquentes ?', answer: 'Réponse à la question 3' },
+        { asking: 'Quelles sont les questions les plus fréquentes ?', answer: 'Réponse à la question 4' },
     ];
 
     return (

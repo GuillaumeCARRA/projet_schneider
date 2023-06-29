@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; 
 import LogoSE from '../../assets/images/logoSE.png';
 
 
@@ -25,12 +26,12 @@ function NavBar() {
                         </a>
                     </li>
                     <li className='navbar__item'>
-                        <a 
-                            href="/"
+                        <Link
+                            to="/product"
                             className='navbar__link'
                         >
                             Nos Solutions
-                        </a>
+                        </Link>
                     </li>
                     <li className='navbar__item'>
                         <a 
