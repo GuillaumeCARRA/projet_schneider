@@ -51,7 +51,7 @@ function Solutions () {
                         <div className='solutions__content'>
                             <img 
                                 src={products.product_img} 
-                                alt="photo produit"
+                                alt="produit"
                                 className='solutions__img'
                             />
                             <div className='solutions__info'>
@@ -78,6 +78,40 @@ function Solutions () {
                             </button>
                         </div>
                     )}
+                    <h3 className='solutions__order'>Voir vos commandes</h3>
+                    <span className='solutions__access'>Accéder à toutes vos commandes en cliquant ici</span>
+                        <div className="solutions__contact">
+                            <form className="solutions__form">
+                                <div className='form-row'>
+                                    <div className="floating-label-group">
+                                        <input type="text" id="last_name" className="form-control" required />
+                                        <label className="floating-label">Nom</label>
+                                    </div>
+                                    <div className="floating-label-group">
+                                        <input type="text" id="first_name" className="form-control" required />
+                                        <label className="floating-label">Prénom</label>
+                                    </div>
+                                </div>
+
+                                <div className='form-row'>
+                                    <div className="floating-label-group">
+                                        <input type="text" id="objet" className="form-control"  required />
+                                        <label className="floating-label">Objet</label>
+                                    </div>
+                                    <div className="floating-label-group">
+                                        <input type="email" id="email" className="form-control" required />
+                                        <label className="floating-label">Email</label>
+                                    </div>
+                                </div>
+
+                                <textarea 
+                                    rows="7"
+                                    required
+                                />
+
+                                <button className='solutions__send'>Envoyer</button>
+                            </form>
+                        </div>
             </div>
         </div>
     )
