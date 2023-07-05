@@ -80,6 +80,10 @@ function Solutions () {
                     )}
                     <h3 className='solutions__order'>Voir vos commandes</h3>
                     <span className='solutions__access'>Accéder à toutes vos commandes en cliquant ici</span>
+                    <p className='solutions__ask'>
+                        Des questions concernant les produits ou désirez-vous passer commande ? 
+                        N'hésitez pas à nous contacter !
+                    </p>
                         <div className="solutions__contact">
                             <form className="solutions__form">
                                 <div className='form-row'>
@@ -104,10 +108,14 @@ function Solutions () {
                                     </div>
                                 </div>
 
-                                <textarea 
-                                    rows="7"
-                                    required
-                                />
+                                <div className="floating-label-group">
+                                    <textarea 
+                                        rows="7"
+                                        required
+                                    />
+                                    <label className="floating-label">Votre Message</label>
+                                </div>
+                                
 
                                 <button className='solutions__send'>Envoyer</button>
                             </form>
