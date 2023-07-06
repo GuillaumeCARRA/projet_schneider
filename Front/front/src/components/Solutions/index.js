@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'; 
 import instance from "../../axios.js"
 
 import logoSE from "../../assets/images/logoSE.png";
@@ -11,6 +11,9 @@ function Solutions () {
     const [products, setProducts] = useState([]);
     console.log("products", products);
 
+    const [currIndex, setCurrIndex] = useState(0);
+    console.log("currIndex", currIndex);
+
     // me permet d'effectuer une requête HTTP vers mon back
     // lors du chargement de mon composant
     useEffect(() => {
@@ -22,7 +25,7 @@ function Solutions () {
                 console.log("response", response.data.data);
 
                 // Met à jour l'état "products" avec les données reçues
-                setProducts(response.data.data[0]);
+                setProducts(response.data.data);
             } catch (error) {
                 console.log("err", error);
             }
@@ -33,6 +36,30 @@ function Solutions () {
         // (ce qui signifie que le useEffect s'exécute uniquement lors du montage initial --> chargement de la page)
         fetchProducts();
     }, []); 
+
+    const prevStep = () => {
+        // Vérifie si l'indice actuel est déjà à zéro
+        if(currIndex === 0) {
+            // Si c'est le cas, on déplace l'indice vers le dernier élément du tableau
+            setCurrIndex(products.length - 1)
+        } else {
+
+            // Sinon, on décrémente  l'indice de 1 pour passer à l'élément précédent
+            setCurrIndex(currIndex - 1);
+        }
+    }
+
+    const nextStep = () => {
+        // Vérifie si l'indice actuel est déjà à la fin du tableau
+        if (currIndex === products.length - 1) {
+            // Si c'est le cas, on revient au premier élément en mettant à jour l'indice à zéro
+          setCurrIndex(0);
+        } else {
+            // Sinon, on incrémente simplement l'indice de 1 pour passer à l'élément suivant
+          setCurrIndex(currIndex + 1);
+        }
+    };
+
 
 
     return (
@@ -52,26 +79,28 @@ function Solutions () {
                     {products && (
                         <div className='solutions__content'>
                             <img 
-                                // src={products.product_img}
-                                src={logoSE} 
+                                src={products[currIndex]?.product_img}
+                                // src={logoSE} 
                                 alt="produit"
                                 className='solutions__img'
                             />
+                            <button onClick={prevStep}>L</button>
+                            <button onClick={nextStep}>R</button>
                             <div className='solutions__info'>
                                 <h2 
                                     className='solutions__name'
                                 >
-                                    {products.product_name}
+                                    {products[currIndex]?.product_name}
                                 </h2>
                                 <p 
                                     className='solutions__description'
                                 >
-                                    {products.product_description}
+                                    {products[currIndex]?.product_description}
                                 </p>
                                 <p 
                                     className='solutions__price'
                                 >
-                                    {products.product_price} €
+                                    {products[currIndex]?.product_price} €
                                 </p>
                                  <button 
                                 className='solutions__btn'
