@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import instance from "../../axios.js"
 
+import logoSE from "../../assets/images/logoSE.png";
+
 import './solutions.css'; 
 
 function Solutions () {
@@ -50,16 +52,17 @@ function Solutions () {
                     {products && (
                         <div className='solutions__content'>
                             <img 
-                                src={products.product_img} 
+                                // src={products.product_img}
+                                src={logoSE} 
                                 alt="produit"
                                 className='solutions__img'
                             />
                             <div className='solutions__info'>
-                                <p 
+                                <h2 
                                     className='solutions__name'
                                 >
                                     {products.product_name}
-                                </p>
+                                </h2>
                                 <p 
                                     className='solutions__description'
                                 >
@@ -68,58 +71,58 @@ function Solutions () {
                                 <p 
                                     className='solutions__price'
                                 >
-                                    {products.product_price}
+                                    {products.product_price} €
                                 </p>
-                            </div>
-                            <button 
+                                 <button 
                                 className='solutions__btn'
                             >
-                                commander
+                                Acheter
                             </button>
+                            </div>
                         </div>
                     )}
-                    <h3 className='solutions__order'>Voir vos commandes</h3>
-                    <span className='solutions__access'>Accéder à toutes vos commandes en cliquant ici</span>
+                    <div className='solutions__infos'>
+                        <h3 className='solutions__order'>Voir vos commandes</h3>
+                        <span className='solutions__access'>Accéder à toutes vos commandes en cliquant <a href="#">ici</a></span>
+                    </div>
                     <p className='solutions__ask'>
                         Des questions concernant les produits ou désirez-vous passer commande ? 
                         N'hésitez pas à nous contacter !
                     </p>
-                        <div className="solutions__contact">
-                            <form className="solutions__form">
-                                <div className='form-row'>
-                                    <div className="floating-label-group">
-                                        <input type="text" id="last_name" className="form-control" required />
-                                        <label className="floating-label">Nom</label>
-                                    </div>
-                                    <div className="floating-label-group">
-                                        <input type="text" id="first_name" className="form-control" required />
-                                        <label className="floating-label">Prénom</label>
-                                    </div>
-                                </div>
-
-                                <div className='form-row'>
-                                    <div className="floating-label-group">
-                                        <input type="text" id="objet" className="form-control"  required />
-                                        <label className="floating-label">Objet</label>
-                                    </div>
-                                    <div className="floating-label-group">
-                                        <input type="email" id="email" className="form-control" required />
-                                        <label className="floating-label">Email</label>
-                                    </div>
-                                </div>
-
+                    <div className="solutions__contact">
+                        <form className="solutions__form">
+                            <div className='form-row'>
                                 <div className="floating-label-group">
-                                    <textarea 
-                                        rows="7"
-                                        required
-                                    />
-                                    <label className="floating-label">Votre Message</label>
+                                    <input type="text" id="last_name" className="form-control" required />
+                                    <label className="floating-label">Nom</label>
                                 </div>
-                                
+                                <div className="floating-label-group">
+                                    <input type="text" id="first_name" className="form-control" required />
+                                     <label className="floating-label">Prénom</label>
+                                </div>
+                            </div>
 
-                                <button className='solutions__send'>Envoyer</button>
-                            </form>
-                        </div>
+                            <div className='form-row'>
+                                <div className="floating-label-group">
+                                    <input type="text" id="objet" className="form-control"  required />
+                                    <label className="floating-label">Objet</label>
+                                </div>
+                                <div className="floating-label-group">
+                                    <input type="email" id="email" className="form-control" required />
+                                    <label className="floating-label">Email</label>
+                                </div>
+                            </div>
+
+                            <div className="floating-label-group">
+                                <textarea 
+                                    rows="7"
+                                    required
+                                />
+                                <label className="floating-label">Votre Message</label>
+                            </div>
+                            <button className='solutions__send'>Envoyer</button>
+                        </form>
+                    </div>
             </div>
         </div>
     )
