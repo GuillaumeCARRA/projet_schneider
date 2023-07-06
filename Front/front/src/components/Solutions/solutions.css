@@ -10,23 +10,22 @@
 }
 
 .solutions__title {
-    margin-left: 200px;
+    margin-left: 220px;
     margin-bottom: 40px;
-    font-size: 2.3rem;
+    font-size: 2.5rem;
 }
 
 .solutions__content {
     display: flex;
-    /* justify-content: center;*/
     align-items: center; 
-    /* margin-left: 0px; */
+    margin-left: 20px;
 }
 
 .solutions__img {
-    width: 400px;
+    width: 450px;
     margin-left: 200px;
     border: 1px solid black;
-    height: 400px;
+    height: 450px;
     border-radius: 5px;
 }
 
@@ -35,39 +34,39 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+   
 }
 
 .solutions__name {
-    margin: 15px auto -5px 80px;
+    margin: 15px auto -5px 90px;
     font-size: 1.8rem;
     display: flex;
 }
 
 .solutions__description {
-    padding-left: 80px;
-    /* padding-right: 00px; */
-    width: 700px;
+    padding-left: 90px;
+    width: 850px;
     font-size: 1.1rem;
-    line-height: 2rem;
+    line-height: 1.8rem;
     text-align: justify;
-    margin-top: 30px;
+    margin-top: 25px;
 }
 
 .solutions__price {
     font-size: 1.05rem;
-    margin-right: 75%;
+    margin-right: 77%;
     margin-top: -5px;
+    font-weight: bold;
 }
 
 .solutions__btn {
-    margin-right: 65%;
+    margin: 10px 68% auto 10px;
     outline-style: none;
     border-radius: 5px;
     cursor: pointer;
     border: none;
     padding: 15px;
     width: 15%;
-    margin-top: 15px;
     color: #ffffff;
     font-size: 1rem;
     font-weight: bold;
@@ -75,12 +74,12 @@
 }
 
 .solutions__infos {
-    margin: 80px auto 80px 200px;
+    margin: 95px auto 95px 220px;
    
 }
 
 .solutions__order {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
 }
 
 .solutions__access {
@@ -171,6 +170,7 @@ textarea:not(:focus):valid ~ .floating-label {
     color: #ffffff;
     font-size: 1rem;
     font-weight: bold;
+    margin-bottom: 20px;
 
     &:hover {
         background-color: #55d1fe;
