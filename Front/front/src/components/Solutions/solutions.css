@@ -24,10 +24,45 @@
 .solutions__img {
     width: 450px;
     margin-left: 200px;
-    border: 1px solid black;
+    border: 1px solid lightgray;
     height: 450px;
-    border-radius: 15px;
+    border-radius: 50px;
+    object-position: center;
+    box-shadow: 15px 10px 8px rgba(0, 0, 0, 0.1);
 }
+
+.solutions__content > button {
+    cursor: pointer;
+    width: 30px;
+    font-size: 18px;
+    aspect-ratio: 1;
+    border-radius: 30px;
+    border: none; 
+    text-align: center;
+    background-color: #42b4e6;
+    color: #ffffff;
+}
+
+.solutions__content > button:hover {
+    background-color: #55d1fe;
+
+}
+
+.slider__left {
+    position: absolute;
+    top: 52%; 
+    left: 12%; 
+    transform: translateY(-50%);
+}
+
+
+.slider__right {
+    position: absolute;
+    top: 52%; 
+    right: 65.1%; 
+    transform: translateY(-50%);
+}
+
 
 .solutions__info {
     display: flex;
