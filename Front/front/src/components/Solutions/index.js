@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'; 
-import instance from "../../axios.js"
+import instance from "../../axios.js";
 
 import logoSE from "../../assets/images/logoSE.png";
 
@@ -9,7 +9,7 @@ function Solutions () {
 
     // stock les données récupérées depuis le backend
     const [products, setProducts] = useState([]);
-    console.log("products", products);
+    console.log("img", products);
 
     const [currIndex, setCurrIndex] = useState(0);
     console.log("currIndex", currIndex);
@@ -21,11 +21,10 @@ function Solutions () {
         const fetchProducts = async () => {
             try {
                 // Effectue une requête à l'API back pour obtenir les produits
-                const response = await instance.get('/product');
-                console.log("response", response.data.data);
+                const response = await instance.get(`/product`);
 
                 // Met à jour l'état "products" avec les données reçues
-                setProducts(response.data.data);
+                setProducts(response.data.data)
             } catch (error) {
                 console.log("err", error);
             }
@@ -43,7 +42,6 @@ function Solutions () {
             // Si c'est le cas, on déplace l'indice vers le dernier élément du tableau
             setCurrIndex(products.length - 1)
         } else {
-
             // Sinon, on décrémente  l'indice de 1 pour passer à l'élément précédent
             setCurrIndex(currIndex - 1);
         }
@@ -60,32 +58,30 @@ function Solutions () {
         }
     };
 
-
-
     return (
         <div className='solutions'>
             <div className='solutions__container'>
                 <h1 className='solutions__title'>Nos Solutions</h1>
-                    {/* {products.map((product) => (
-                        <div>
-                        <img src={product.product_img} alt="photo produit"/>
-                            <li key={product.id}>
-                                <p>{product.product_name}</p>
-                                <p>{product.product_description}</p>
-                                <p>{product.product_price}</p>
-                            </li>
-                        </div>
-                    ))} */}
                     {products && (
                         <div className='solutions__content'>
                             <img 
-                                src={products[currIndex]?.product_img}
-                                // src={logoSE} 
+                                // src={products[currIndex]?.product_img}
+                                src={logoSE} 
                                 alt="produit"
                                 className='solutions__img'
                             />
-                            <button onClick={prevStep}>L</button>
-                            <button onClick={nextStep}>R</button>
+                            <button 
+                                className="slider__left" 
+                                onClick={prevStep}
+                            >
+                                ❮
+                            </button>
+                            <button 
+                                className="slider__right" 
+                                onClick={nextStep}
+                            >
+                                ❯
+                            </button>
                             <div className='solutions__info'>
                                 <h2 
                                     className='solutions__name'
@@ -102,11 +98,11 @@ function Solutions () {
                                 >
                                     {products[currIndex]?.product_price} €
                                 </p>
-                                 <button 
-                                className='solutions__btn'
-                            >
-                                Acheter
-                            </button>
+                                <button 
+                                    className='solutions__btn'
+                                >
+                                Se renseigner
+                                </button>
                             </div>
                         </div>
                     )}

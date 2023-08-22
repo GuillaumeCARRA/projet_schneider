@@ -40,6 +40,7 @@ const getOneProduct = async (req, res) => {
     }
 }
 
+
 const createProduct = async(req, res) => {
     
     const productData = {

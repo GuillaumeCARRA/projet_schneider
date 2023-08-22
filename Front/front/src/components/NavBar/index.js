@@ -34,28 +34,20 @@ function NavBar() {
                         </Link>
                     </li>
                     <li className='navbar__item'>
-                        <a 
-                            href="/"
+                        <Link 
+                            to="/documentation-file"
                             className='navbar__link'
                         >
                             Documentation
-                        </a>
+                        </Link>
                     </li>
                     <li className='navbar__item'>
-                        <a 
-                            href="/"
-                            className='navbar__link'
-                        >
-                            Téléchargement
-                        </a>
-                    </li>
-                    <li className='navbar__item'>
-                        <a 
-                            href="/"
+                        <Link
+                            to="/faq-ask"
                             className='navbar__link'
                         >
                             FAQ
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </div>
