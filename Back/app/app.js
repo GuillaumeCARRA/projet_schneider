@@ -6,6 +6,10 @@ import {} from "dotenv/config";
 
 import cors from "cors";
 
+import activedirectory from "activedirectory"; 
+
+import path from 'path'; 
+
 //create express server
 const app = express(); 
 
@@ -24,6 +28,16 @@ app.use(cors({
     allowedHeaders: 'Content-Type'
 }));
 
+
+app.get('/', (req, res) => {
+    var userprofile = process.env.USERPROFILE;
+    if (userprofile) {
+        const user = path.basename(userprofile);
+        res.json({ userProfile: user });
+    } else {
+        res.json({ userProfile: null });
+    }
+});
 
 // Utilisation du routeur pour gérer les routes
 app.use(router);
