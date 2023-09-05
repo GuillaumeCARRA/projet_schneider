@@ -50,7 +50,7 @@
 
 .slider__left {
     position: absolute;
-    top: 52%; 
+    top: 57%; 
     left: 12%; 
     transform: translateY(-50%);
 }
@@ -58,7 +58,7 @@
 
 .slider__right {
     position: absolute;
-    top: 52%; 
+    top: 57%; 
     right: 65.1%; 
     transform: translateY(-50%);
 }
@@ -94,17 +94,18 @@
 }
 
 .solutions__btn {
-    margin: 10px 68% auto 10px;
-    outline-style: none;
+    margin: 10px 65% auto 10px;
     border-radius: 5px;
     cursor: pointer;
     border: none;
     padding: 15px;
     width: 15%;
     color: #ffffff;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: bold;
     background-color: #42b4e6;
+    text-align: center;
+    text-decoration: none;
 }
 
 .solutions__infos {

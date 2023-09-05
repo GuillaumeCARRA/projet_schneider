@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+
 
 //import component
 import Footer from '../Footer/index.js'; 
@@ -13,6 +14,8 @@ function HomePage() {
 
     //Déclaration de l'état initial pour askOpen à l'aide du hook useState
     const [askOpen, setAskOpen] = useState([]);
+    
+
       
     //Fonction toggleAsk qui permet de basculer l'état d'ouverture pour un élément donné
     const toggleAsk = (index) => {
@@ -30,6 +33,8 @@ function HomePage() {
         { asking: 'Quelles sont les questions les plus fréquentes ?', answer: 'Réponse à la question 3' },
         { asking: 'Quelles sont les questions les plus fréquentes ?', answer: 'Réponse à la question 4' },
     ];
+
+   
 
     return (
         <div className='homepage'>

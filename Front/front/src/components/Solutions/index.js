@@ -98,11 +98,12 @@ function Solutions () {
                                 >
                                     {products[currIndex]?.product_price} €
                                 </p>
-                                <button 
+                                <a 
                                     className='solutions__btn'
+                                    href="#contact-form"
                                 >
                                 Se renseigner
-                                </button>
+                                </a>
                             </div>
                         </div>
                     )}
@@ -114,7 +115,7 @@ function Solutions () {
                         Des questions concernant les produits ou désirez-vous passer commande ? 
                         N'hésitez pas à nous contacter !
                     </p>
-                    <div className="solutions__contact">
+                    <div id="contact-form" className="solutions__contact">
                         <form className="solutions__form">
                             <div className='form-row'>
                                 <div className="floating-label-group">
