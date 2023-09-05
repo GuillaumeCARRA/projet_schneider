@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import instance from '../../axios';
 import { Link } from 'react-router-dom'; 
 import LogoSE from '../../assets/images/logoSE.png';
 
@@ -6,6 +7,26 @@ import LogoSE from '../../assets/images/logoSE.png';
 import './navbar.css'; 
 
 function NavBar() {
+
+    const [userProfile, setUserProfile] = useState('');
+
+    console.log('user', userProfile);
+
+    useEffect(() => {
+       const fecthUser = async () => {
+            try {
+                const response = await instance.get('/'); 
+                console.log(response);
+                setUserProfile(response.data.userProfile);
+            } catch (error) {
+                console.log("err", error);
+            }
+       }
+       fecthUser();
+    }, []);
+
+ 
+
     return (
         <div className='navbar'>
             <div className='navbar__container'>
@@ -18,12 +39,12 @@ function NavBar() {
                 </div>  
                 <ul className='navbar__list'>
                     <li className='navbar__item'>
-                        <a 
-                            href="/"
+                        <Link
+                            to="/"
                             className='navbar__link'
                         >
                             Accueil
-                        </a>
+                        </Link>
                     </li>
                     <li className='navbar__item'>
                         <Link
@@ -50,6 +71,16 @@ function NavBar() {
                         </Link>
                     </li>
                 </ul>
+            </div>
+            <div className='navbar__titleprofile'>
+                {userProfile ? (
+                        <p>
+                            Bonjour {userProfile}
+                        </p>
+                    ) : (
+                        ''
+                    )
+                }
             </div>
         </div>
     )
