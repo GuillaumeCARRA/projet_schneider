@@ -7,8 +7,6 @@ import './documentation.css';
 
 function Documentation () {
 
-    // Utilisation de useState pour déclarer des états et les fonctions pour les mettre à jour
-
     // État pour stocker les données de documentation
     const [documentation, setDocumentation] = useState([]);
    
@@ -23,9 +21,23 @@ function Documentation () {
     
      // État pour stocker la nouvelle taille saisie par l'utilisateur
     const [newSize, setNewSize] = useState('');
-    
 
-    
+    // Etat pour fermer/ouvrir form de modification
+    const [cancelEdit, setCancelEdit] = useState(false); 
+
+    // État pour gérer l'affichage du formulaire de création
+    const [showCreateForm, setShowCreateForm] = useState(false);
+
+    // États pour stocker les données du nouveau document en cours de création
+    const [newDocumentData, setNewDocumentData] = useState({
+      documentation_file_name: '',
+      documentation_file_format: '',
+      documentation_file_img: '',
+      documentation_file_size: '',
+    });
+
+    const isUser = userProfile === 'SESA681854';
+   
 
     useEffect (() => {
         // Fonction asynchrone pour effectuer une requête HTTP pour récupérer les données de documentation
@@ -35,7 +47,7 @@ function Documentation () {
               // Effectue une requête GET à l'API pour obtenir les données de documentation
               const response = await instance.get('/documentation-file');
               
-              // Met à jour l'état 'documentation' avec les données récupérées de l'API
+              // Met à jour l'état documentation avec les données récupérées de l'API
               setDocumentation(response.data.data); 
 
           } catch (error) {
@@ -45,10 +57,9 @@ function Documentation () {
 
         const fetchUserProfile = async () => {
           try {
-             // Fonction asynchrone pour récupérer le profil de l'utilisateur
               const response = await instance.get('/');
 
-              // Met à jour l'état 'userProfile' avec le profil de l'utilisateur récupéré de l'API
+              
               setUserProfile(response.data.userProfile);
           } catch (error) {
               console.log("err", error);
@@ -66,7 +77,6 @@ function Documentation () {
 
          // Vérifie si les champs ne sont pas vides et  supprime les espaces, tabulation, etc.., avec la méthode trim()
         if (newData.newTitle.trim() === '' || newData.newSize.trim() === '') {
-            console.log("Les champs ne doivent pas être vides");
             return alert("Les champs ne doivent pas être vides");
         }
 
@@ -102,7 +112,7 @@ function Documentation () {
 
           setEditingDocumentId(id);
 
-          // Réinitialise les états 'newTitle' et 'newSize' à des chaînes vides
+          // Réinitialisation des états newTitle et newSize
           setNewTitle('');
           setNewSize('');
           
@@ -111,92 +121,172 @@ function Documentation () {
       }
   };
 
+  // Fonction pour fermer le formulaire de modification
+  const handleCancelEdit = () => {
+    setCancelEdit(!cancelEdit); 
+    setEditingDocumentId(null);
 
-    return (
-      <div className='documentation'>
-          <div className='documentation__title'>
-              <h2 className='documentation__subtitle'>
-                  Documentation
-              </h2>
-          </div>
-          <div className='documentation__cards'>
-              {documentation.map((docs) => (
-                  <div className='documentation__card' key={docs.id}>
-                      <div className='documentation__card' key={docs.id}>
-                          <img
-                          src="https://images.pexels.com/photos/261763/pexels-photo-261763.jpeg?auto=compress&cs=tinysrgb&w=600"
-                          alt='Background'
-                          className='documentation-card-image'
-                          />
-                          <div className='documentation-card-details'>
-                            <h3 className='documentation-card-title'>{docs.documentation_file_name}</h3>
-                            <span className='documentation-card-num-job'>{docs.documentation_file_size} Mo</span>
-                            <button className='documentation-card-btn'>Télécharger</button>
-                          </div>
-                        </div>
-                        {userProfile === "SESA681854" ? (
-                        <div>
-                            <button
-                                onClick={() => setEditingDocumentId(docs.id)}
-                            >
-                                Mettre à jour
-                            </button>
-                            {editingDocumentId === docs.id && (
-                                <div>
-                                    <input
-                                        type="text"
-                                        placeholder="Nouveau Titre"
-                                        value={newTitle}
-                                        onChange={(e) => setNewTitle(e.target.value)}
-                                    />
-                                    <input
-                                        type="text"
-                                        placeholder="Nouvelle Taille (Mo)"
-                                        value={newSize}
-                                        onChange={(e) => setNewSize(e.target.value)}
-                                    />
-                                    <button
-                                        onClick={() => handleUpdate(docs.id, { newTitle: newTitle, newSize: newSize })}
-                                    >
-                                        Enregistrer
-                                    </button>
-                                </div>
-                            )}
-                        </div>
-                    ) : null}
-                  </div>
-              ))}
-              {userProfile !== "SESA681854" ? (
+    setNewTitle('');
+    setNewSize('');
+  };
+
+  // Fonction pour gérer la soumission du formulaire de création
+  const handleCreateDocument = async () => {
+    try {
+      // Effectuez une requête POST pour créer une nouvelle carte de documentation
+      const response = await instance.post('/documentation-file', newDocumentData);
+
+      // Ajoutez la nouvelle carte de documentation à la liste existante
+      setDocumentation([...documentation, response.data]);
+
+      // Réinitialisez les données du nouveau document et masquez le formulaire
+      setNewDocumentData({
+        documentation_file_name: '',
+        documentation_file_format: '',
+        documentation_file_img: '',
+        documentation_file_size: '',
+      });
+      setShowCreateForm(false);
+    } catch (error) {
+      console.log("err", error);
+    }
+  }
+
+
+  // Fonction pour gérer la suppression d'un document
+  const handleDelete = async (id) => {
+    try {
+       
+      await instance.delete(`/documentation-file/${id}`);
+
+      setDocumentation((prevDocumentation) => prevDocumentation.filter(doc => doc.id !== id));
+    } catch (error) {
+      console.log("err", error);
+    }
+  };
+
+
+  
+
+  return (
+    <div className='documentation'>
+      <div className='documentation__title'>
+        <h2 className='documentation__subtitle'>
+          Documentation
+        </h2>
+      </div>
+      <div className='documentation__cards'>
+          {isUser && (
+            <>
+              <button onClick={() => setShowCreateForm(!showCreateForm)}>
+                Créer une nouvelle carte
+              </button>
+              {showCreateForm && (
+                <div className='documentation__card'>
+                    <input
+                      type="text"
+                      placeholder="Nom du fichier"
+                      value={newDocumentData.documentation_file_name}
+                      onChange={(e) =>
+                        setNewDocumentData({
+                          ...newDocumentData,
+                          documentation_file_name: e.target.value,
+                        })
+                      }
+                    />
+                    <input
+                      type="text"
+                      placeholder="Format du fichier"
+                      value={newDocumentData.documentation_file_format}
+                      onChange={(e) =>
+                        setNewDocumentData({
+                          ...newDocumentData,
+                          documentation_file_format: e.target.value,
+                        })
+                      }
+                    />
+                    <input
+                      type="text"
+                      placeholder="URL de l'image"
+                      value={newDocumentData.documentation_file_img}
+                      onChange={(e) =>
+                        setNewDocumentData({
+                          ...newDocumentData,
+                          documentation_file_img: e.target.value,
+                        })
+                      }
+                    />
+                    <input
+                      type="text"
+                      placeholder="Taille du fichier (Mo)"
+                      value={newDocumentData.documentation_file_size}
+                      onChange={(e) =>
+                        setNewDocumentData({
+                          ...newDocumentData,
+                          documentation_file_size: e.target.value,
+                        })
+                      }
+                    />
+                  <button onClick={handleCreateDocument}>Créer</button>
+                </div>
+              )}
+            </>
+          )}
+          {documentation.map((docs) => (
+            <div className='documentation__card' key={docs.id}>
+              <img
+                src="https://images.pexels.com/photos/261763/pexels-photo-261763.jpeg?auto=compress&cs=tinysrgb&w=600"
+                alt='Background'
+                className='documentation-card-image'
+              />
+              <div className='documentation-card-details'>
+                <h3 className='documentation-card-title'>{docs.documentation_file_name}</h3>
+                <span className='documentation-card-num-job'>{docs.documentation_file_size} Mo</span>
+                <button className='documentation-card-btn'>Télécharger</button>
+                {isUser && (
                   <div>
-                      <div className='documentation'>
-                  <div className='documentation__title'>
-                    <h2 
-                      className='documentation__subtitle'
+                    <button 
+                      onClick={() => setEditingDocumentId(docs.id)}
                     >
-                      Documentation
-                    </h2>
+                      Mettre à jour
+                    </button>
+                    <button 
+                      onClick={() => handleDelete(docs.id)}
+                    >
+                      Supprimer
+                    </button>
+                    {editingDocumentId === docs.id && (
+                      <div>
+                        <input
+                          type="text"
+                          placeholder="Nouveau Titre"
+                          value={newTitle}
+                          onChange={(e) => setNewTitle(e.target.value)}
+                        />
+                        <input
+                          type="text"
+                          placeholder="Nouvelle Taille (Mo)"
+                          value={newSize}
+                          onChange={(e) => setNewSize(e.target.value)}
+                        />
+                        <button
+                          onClick={() => handleUpdate(docs.id, { newTitle: newTitle, newSize: newSize })}
+                        >
+                          Enregistrer
+                        </button>
+                        <button 
+                          onClick={handleCancelEdit}
+                        >
+                          Annuler
+                        </button>
+                      </div>
+                    )}
                   </div>
-                  <div className='documentation__cards'>
-                   {documentation.map((docs) => (
-                        <div className='documentation__card' key={docs.id}>
-                          <img
-                          src="https://images.pexels.com/photos/261763/pexels-photo-261763.jpeg?auto=compress&cs=tinysrgb&w=600"
-                          alt='Background'
-                          className='documentation-card-image'
-                          />
-                          <div className='documentation-card-details'>
-                            <h3 className='documentation-card-title'>{docs.documentation_file_name}</h3>
-                            <span className='documentation-card-num-job'>{docs.documentation_file_size} Mo</span>
-                            <button className='documentation-card-btn'>Télécharger</button>
-                          </div>
-                        </div>
-                    ))
-                   } 
-                  </div>
+                )}
+              </div>
             </div>
-                  </div>
-              ) : null}
-          </div>
+          ))}
+        </div>
       </div>
     );
   }; 
