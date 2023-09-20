@@ -19,16 +19,16 @@ function Documentation () {
     // État pour stocker le nouveau titre saisi par l'utilisateur
     const [newTitle, setNewTitle] = useState('');
     
-     // État pour stocker la nouvelle taille saisie par l'utilisateur
+    // État pour stocker la nouvelle taille saisie par l'utilisateur
     const [newSize, setNewSize] = useState('');
 
-    // Etat pour fermer/ouvrir form de modification
+    // État pour fermer/ouvrir form de modification
     const [cancelEdit, setCancelEdit] = useState(false); 
 
     // État pour gérer l'affichage du formulaire de création
     const [showCreateForm, setShowCreateForm] = useState(false);
 
-    // États pour stocker les données du nouveau document en cours de création
+    // État pour stocker les données du nouveau document en cours de création
     const [newDocumentData, setNewDocumentData] = useState({
       documentation_file_name: '',
       documentation_file_format: '',
@@ -121,7 +121,7 @@ function Documentation () {
       }
   };
 
-  // Fonction pour fermer le formulaire de modification
+  // Fonction pour annuler la modification
   const handleCancelEdit = () => {
     setCancelEdit(!cancelEdit); 
     setEditingDocumentId(null);
@@ -133,13 +133,13 @@ function Documentation () {
   // Fonction pour gérer la soumission du formulaire de création
   const handleCreateDocument = async () => {
     try {
-      // Effectuez une requête POST pour créer une nouvelle carte de documentation
+      // Effectue une requête POST pour créer une nouvelle carte de documentation
       const response = await instance.post('/documentation-file', newDocumentData);
 
-      // Ajoutez la nouvelle carte de documentation à la liste existante
+      // Ajoute la nouvelle carte de documentation à la liste existante
       setDocumentation([...documentation, response.data]);
 
-      // Réinitialisez les données du nouveau document et masquez le formulaire
+      // Réinitialise les données du nouveau document et masque le formulaire
       setNewDocumentData({
         documentation_file_name: '',
         documentation_file_format: '',
@@ -150,7 +150,7 @@ function Documentation () {
     } catch (error) {
       console.log("err", error);
     }
-  }
+  };
 
 
   // Fonction pour gérer la suppression d'un document
@@ -178,7 +178,9 @@ function Documentation () {
       <div className='documentation__cards'>
           {isUser && (
             <>
-              <button onClick={() => setShowCreateForm(!showCreateForm)}>
+              <button 
+                onClick={() => setShowCreateForm(!showCreateForm)}
+              >
                 Créer une nouvelle carte
               </button>
               {showCreateForm && (
