@@ -14,6 +14,22 @@ function Solutions () {
     const [currIndex, setCurrIndex] = useState(0);
     console.log("currIndex", currIndex);
 
+    // État pour stocker le profil de l'utilisateur
+    const [userProfile, setUserProfile] = useState('');
+
+    // État pour stocker le nouveau titre saisi par l'utilisateur
+    const [newName, setNewName] = useState('');
+
+    const [newPrice, setNewPrice] = useState('');
+
+    const [newDescription, steNewDescription] = useState('');
+
+    const [editingProductId, setEditingProductId] = useState(null);
+
+    const [cancelEdit, setCancelEdit] = useState(false);
+
+    const isUser = userProfile === 'SESA681854';
+
     // me permet d'effectuer une requête HTTP vers mon back
     // lors du chargement de mon composant
     useEffect(() => {
@@ -28,12 +44,25 @@ function Solutions () {
             } catch (error) {
                 console.log("err", error);
             }
-        }
+        };
+
+        const fetchUserProfile = async () => {
+            try {
+                const response = await instance.get('/');
+  
+                
+                setUserProfile(response.data.userProfile);
+            } catch (error) {
+                console.log("err", error);
+            }
+        };
 
         // Appel de la fonction fetchProducts une fois au chargement initial du composant
         // en passant un tableau vide de dépendances
         // (ce qui signifie que le useEffect s'exécute uniquement lors du montage initial --> chargement de la page)
         fetchProducts();
+        fetchUserProfile();
+
     }, []); 
 
     const prevStep = () => {
@@ -57,6 +86,65 @@ function Solutions () {
           setCurrIndex(currIndex + 1);
         }
     };
+
+    const handleUpdate = async(id, newData) => {
+       try {
+            if (newData.newName.trim() === '' || newData.newPrice.trim() === '' || newData.newDescription.trim() === '') {
+                return alert("Les champs ne doivent pas être vides");
+            }
+
+            await instance.patch(`/product/${id}`, {
+                product_name: newData.newName,
+                product_price: newData.product_price, 
+                product_description: newData.product_description
+            }); 
+
+            setProducts((prevProduct) => {
+                return prevProduct.map((product) => {
+                    if(product.id === id) {
+                        return {
+                            ...product,
+                            product_name: newData.newName,
+                            product_price: newData.product_price, 
+                            product_description: newData.product_description
+                        }
+                    
+                    }
+                    return product;
+                })
+            });
+
+            setEditingProductId(id);
+
+            setNewName('');
+            setNewPrice('');
+            steNewDescription('');
+
+       } catch (error) {
+        console.log("err", error);
+       }
+    };
+
+    const handleCancelEdit = () => {
+        setCancelEdit(!cancelEdit); 
+        setEditingProductId(null);
+    
+        setNewName('');
+        setNewPrice('');
+        steNewDescription('');
+      };
+
+    const handleDelete = async (id) => {
+        try {
+           
+          await instance.delete(`/product/${id}`);
+    
+          setProducts((prevProduct) => prevProduct.filter(doc => doc.id !== id));
+        } catch (error) {
+          console.log("err", error);
+        }
+      };
+    
 
     return (
         <div className='solutions'>
