@@ -12,7 +12,6 @@ const getAllFaqAnswers = async (req, res) => {
 
         return res.json({data: faqAnswers}); 
     } catch (error) {
-        console.log(error);
         return res.status(500).json({error}); 
     }
 }
@@ -35,7 +34,6 @@ const getOneFaqAnswer = async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error);
         return res.status(500).json({error}); 
     }
 }

@@ -12,7 +12,6 @@ const getAllDownloadFiles = async (req, res) => {
 
         return res.json({data: downloadFiles}); 
     } catch (error) {
-        console.log(error);
         return res.status(500).json({error}); 
     }
 }
@@ -57,7 +56,6 @@ const createDownloadFile = async(req, res) => {
         return res.status(201).json(downloadFile); 
         
     } catch (error) {
-        console.log(error);
         return res.status(500).json({error});
     }
 }
@@ -98,8 +96,6 @@ const updateDownloadFile = async(req, res) => {
         return res.json({data: updatedDownloadFile});
         
     } catch (error) {
-        console.log(error);
-
         return res.status(500).json({error});
     }
 }
@@ -120,7 +116,6 @@ const deleteDownloadFile = async (req, res) => {
         return res.json({data: deletedDownloadFile});
 
     } catch (error) {
-        console.log(error);
         return res.status(500).json({ error });
     }
 }
@@ -156,7 +151,6 @@ const associateDlCategory = async(req, res) => {
         res.json({data: download}); 
 
     } catch (error) {
-        console.log(error);
         res.status(500).json({ error });
     }
 }
@@ -189,7 +183,6 @@ const dissociateDlCategory = async(req, res) => {
         res.json({data: download}); 
 
     } catch (error) {
-        console.log(error);
         res.status(500).json({ error });
     }
 }

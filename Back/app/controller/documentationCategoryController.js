@@ -95,7 +95,6 @@ const updateCategory = async (req, res) => {
         res.json({ data: updatedCategory });
 
     } catch (error) {
-        console.log(error);
         // Renvoyer une erreur HTTP 500 en cas d'erreur
         res.status(500).json({ error });
     }

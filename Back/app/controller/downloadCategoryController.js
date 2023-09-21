@@ -12,7 +12,6 @@ const getAllDownloadCategories = async (req, res) => {
       
         return res.json({data: downloadCategories});
     } catch (error) {
-        console.log(error);
         res.status(500).json({error}); 
     }
 }
@@ -35,7 +34,6 @@ const getOneDownloadCategory = async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error);
         res.status(500).json({error}); 
     }
 }
@@ -53,7 +51,6 @@ const createDownloadCategory = async(req, res) => {
         res.status(201).json(downloadCategory); 
         
     } catch (error) {
-        console.log(error);
         res.status(500).json({error});
     }
 }
@@ -104,7 +101,6 @@ const deleteCategory = async (req, res) => {
         res.json({data: deletedCategory});
 
     } catch (error) {
-        console.log(error);
         res.status(500).json({ error });
     }
 }
