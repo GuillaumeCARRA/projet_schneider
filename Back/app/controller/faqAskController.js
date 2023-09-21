@@ -14,7 +14,6 @@ const getAllFaqAsks = async (req, res) => {
 
         return res.json({data: faqAsks}); 
     } catch (error) {
-        console.log(error);
         return res.status(500).json({error}); 
     }
 }
@@ -38,7 +37,6 @@ const getOneFaqAsk = async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error);
         res.status(500).json({error}); 
     }
 }
@@ -58,7 +56,6 @@ const createFaqAsk = async(req, res) => {
         return res.status(201).json(faqAsk); 
         
     } catch (error) {
-        console.log(error);
        return res.status(500).json({error});
     }
 }
@@ -76,29 +73,17 @@ const updateFaqAsk = async(req, res) => {
 
         const {
             ask
-            // faq_answer_id, 
-            // faq_category_id
         } = req.body
 
         if(ask) {
             updatedFaqAsk.ask = ask; 
         }
 
-        // if(faq_answer_id) {
-        //     updatedFaqAsk.faq_answer_id = faq_answer_id;
-        // }
-
-        // if(faq_category_id) {
-        //     updatedFaqAsk.faq_category_id = faq_category_id;
-        // }
-
         await updatedFaqAsk.save();
 
-       return res.json({data: updatedFaqAsk});
+        return res.json({data: updatedFaqAsk});
         
     } catch (error) {
-        console.log(error);
-
         return res.status(500).json({error});
     }
 }
@@ -116,10 +101,9 @@ const deleteFaqAsk = async (req, res) => {
 
         await deletedFaqAsk.destroy();
 
-       return res.json({data: deletedFaqAsk});
+        return res.json({data: deletedFaqAsk});
 
     } catch (error) {
-        console.log(error);
         return res.status(500).json({ error });
     }
 }
@@ -154,7 +138,6 @@ const associateFaqCategory= async (req, res) => {
         res.json({data: faq});
         
     } catch (error) {
-        console.log(error);
        return res.status(500).json({ error });
     }
 }
@@ -188,7 +171,6 @@ const dissociateFaqCategory = async (req, res) => {
        return res.json({data: faq});
 
     } catch (error) {
-        console.log(error);
        return res.status(500).json({ error });
     }
 }

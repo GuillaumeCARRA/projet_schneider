@@ -42,7 +42,6 @@ const getOneDocumentationFile = async (req, res) => {
             return res.json({ data: oneDocumentation });
         }
     } catch (error) {
-        console.log(error);
         // Renvoyer une erreur HTTP 500 en cas d'erreur
         res.status(500).json({ error });
     }
@@ -55,7 +54,6 @@ const createDocumentationFile = async (req, res) => {
         documentation_file_format: req.body.documentation_file_format,
         documentation_file_img: req.body.documentation_file_img,
         documentation_file_size: req.body.documentation_file_size,
-        // documentation_category_id: req.body.documentation_category_id
     }
 
     try {
@@ -65,7 +63,6 @@ const createDocumentationFile = async (req, res) => {
         // Renvoyer une réponse avec le fichier de documentation créé et le code HTTP 201
         res.status(201).json(documentationFile);
     } catch (error) {
-        console.log(error);
         // Renvoyer une erreur HTTP 500 en cas d'erreur
         res.status(500).json({ error });
     }
@@ -112,7 +109,6 @@ const updateDocumentationFile = async (req, res) => {
         res.json({ data: updatedDocumentationFile });
 
     } catch (error) {
-        console.log(error);
         // Renvoyer une erreur HTTP 500 en cas d'erreur
         res.status(500).json({ error });
     }
@@ -137,7 +133,6 @@ const deleteDocumentationFile = async (req, res) => {
         res.json({ data: deletedDocumentationFile });
 
     } catch (error) {
-        console.log(error);
         // Renvoyer une erreur HTTP 500 en cas d'erreur
         res.status(500).json({ error });
     }
@@ -179,7 +174,6 @@ const associateCategory = async (req, res) => {
         res.json({ data: doc });
 
     } catch (error) {
-        console.log(error);
         // Renvoyer une erreur HTTP 500 en cas d'erreur
         res.status(500).json({ error });
     }
@@ -219,7 +213,6 @@ const dissociateCategory = async (req, res) => {
         res.json({ data: doc });
 
     } catch (error) {
-        console.log(error);
         // Renvoyer une erreur HTTP 500 en cas d'erreur
         res.status(500).json({ error });
     }

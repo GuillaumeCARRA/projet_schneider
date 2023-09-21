@@ -11,7 +11,6 @@ const getAllFaqCategories = async (req, res) => {
 
         return res.json({data: faqCategories}); 
     } catch (error) {
-        console.log(error);
         return res.status(500).json({error}); 
     }
 }
@@ -36,7 +35,6 @@ const getOneFaqCategory = async (req, res) => {
          
 
     } catch (error) {
-        console.log(error);
         return res.status(500).json({error}); 
     }
 }
@@ -54,7 +52,6 @@ const createFaqCategory = async(req, res) => {
         return res.status(201).json(faqCategory); 
         
     } catch (error) {
-        console.log(error);
         res.status(500).json({error});
     }
 }
@@ -83,7 +80,6 @@ const updateCategory = async(req, res) => {
         return res.json({data: updatedFaqCategory});
         
     } catch (error) {
-        console.log(error);
 
         res.status(500).json({error});
     }
@@ -105,7 +101,6 @@ const deleteCategory = async (req, res) => {
         return res.json({data: deletedCategory});
 
     } catch (error) {
-        console.log(error);
         return res.status(500).json({ error });
     }
 }

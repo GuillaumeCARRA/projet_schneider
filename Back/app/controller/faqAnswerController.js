@@ -12,7 +12,6 @@ const getAllFaqAnswers = async (req, res) => {
 
         return res.json({data: faqAnswers}); 
     } catch (error) {
-        console.log(error);
         return res.status(500).json({error}); 
     }
 }
@@ -35,7 +34,6 @@ const getOneFaqAnswer = async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error);
         return res.status(500).json({error}); 
     }
 }
@@ -54,7 +52,6 @@ const createFaqAnswer = async(req, res) => {
         return res.status(201).json(faqAnswer); 
         
     } catch (error) {
-        console.log(error);
         return res.status(500).json({error});
     }
 }
@@ -88,8 +85,6 @@ const updateFaqAnswer = async(req, res) => {
         return res.json({data: updatedFaqAnswer});
         
     } catch (error) {
-        console.log(error);
-
         return res.status(500).json({error});
     }
 }
@@ -110,7 +105,6 @@ const deleteFaqAnswer = async (req, res) => {
         return res.json({data: deletedFaqAnswer});
 
     } catch (error) {
-        console.log(error);
         return res.status(500).json({ error });
     }
 }
