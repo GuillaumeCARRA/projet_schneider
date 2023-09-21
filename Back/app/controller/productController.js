@@ -11,7 +11,6 @@ const getAllProducts = async (req, res) => {
 
        return res.json({data: products}); 
     } catch (error) {
-        console.log(error);
         res.status(500).json({error}); 
     }
 }
@@ -35,7 +34,6 @@ const getOneProduct = async (req, res) => {
         }
         
     } catch (error) {
-        console.log(error);
         return res.status(500).json({error}); 
     }
 }
@@ -57,7 +55,6 @@ const createProduct = async(req, res) => {
         return res.status(201).json(product); 
         
     } catch (error) {
-        console.log(error);
         return res.status(500).json({error});
     }
 }
@@ -98,7 +95,6 @@ const updateProduct = async(req, res) => {
         res.json({data: updatedProduct});
         
     } catch (error) {
-        console.log(error);
 
         return res.status(500).json({error});
     }
@@ -120,7 +116,6 @@ const deleteProduct = async (req, res) => {
         return res.json({data: deletedProduct});
 
     } catch (error) {
-        console.log(error);
         return res.status(500).json({ error });
     }
 }

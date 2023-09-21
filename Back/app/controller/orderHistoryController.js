@@ -11,7 +11,6 @@ const getAllOrderHistories = async (req, res) => {
 
         return res.json({data: orderHistories}); 
     } catch (error) {
-        console.log(error);
         return res.status(500).json({error}); 
     }
 }
@@ -34,7 +33,6 @@ const getOneOrderHistory = async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error);
         return res.status(500).json({error}); 
     }
 }
@@ -78,7 +76,6 @@ const updateOrderHistory = async(req, res) => {
         return res.json({data: updatedOrderHistory}); 
         
     } catch (error) {
-        console.log(error);
         return res.status(500).json({error}); 
     }
 }
@@ -97,7 +94,6 @@ const deleteOrderHistory = async(req, res) => {
         return res.status(200).json({data: deletedOrderHistory}); 
 
     } catch (error) {
-        console.log(error);
         return res.status(500).json({error}); 
     }
 }
